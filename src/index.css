@@ -1,0 +1,463 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Premium Brand Colors */
+  --color-primary: #1e1b4b;
+  --color-primary-light: #312e81;
+  --color-primary-dark: #0f0a3c;
+
+  /* Accent Colors - Softer, more premium red */
+  --color-accent: #e63946;
+  --color-accent-light: #ff6b7a;
+  --color-accent-dark: #c1121f;
+
+  /* Modern Gradient Palette */
+  --gradient-primary: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+  --gradient-accent: linear-gradient(135deg, #e63946 0%, #ff6b7a 100%);
+  --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+  --gradient-mesh: radial-gradient(at 40% 20%, hsla(240, 80%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(355, 85%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(240, 80%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(355, 70%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(240, 60%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(355, 50%, 97%, 1) 0px, transparent 50%);
+
+  /* Backgrounds */
+  --color-bg: #fafbfc;
+  --color-bg-alt: #f1f5f9;
+  --color-content-bg: #ffffff;
+
+  /* Text */
+  --color-text-main: #0f172a;
+  --color-text-muted: #475569;
+  --color-text-light: #94a3b8;
+  --color-text-white: #ffffff;
+
+  /* Spacing System */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+
+  /* Borders & Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 40px;
+  --radius-full: 9999px;
+
+  /* Premium Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Glassmorphism Shadows */
+  --shadow-glass: 0 8px 32px rgba(30, 27, 75, 0.12);
+  --shadow-float: 0 20px 40px -10px rgba(30, 27, 75, 0.15);
+  --shadow-glow-primary: 0 0 40px rgba(30, 27, 75, 0.2);
+  --shadow-glow-accent: 0 0 40px rgba(230, 57, 70, 0.25);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+/* Modern Typography Utilities */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-accent {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+  background: rgba(30, 27, 75, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-slow {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(3deg);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(230, 57, 70, 0.5);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes blob {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate(20px, -30px) scale(1.1);
+  }
+
+  50% {
+    transform: translate(-10px, 20px) scale(0.9);
+  }
+
+  75% {
+    transform: translate(15px, 10px) scale(1.05);
+  }
+}
+
+/* Animation Utilities - Legacy CSS fallback (GSAP now handles most animations) */
+/* These are kept for Hero.jsx if used, but most components now use GSAP */
+.animate-fade-in {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.animate-blob {
+  animation: blob 20s ease-in-out infinite;
+}
+
+/* Scroll-triggered animations - Now handled by GSAP ScrollTrigger */
+/* Kept as CSS fallback for no-JS scenarios */
+.fade-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Modern Button Styles */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 16px 32px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-lg), var(--shadow-glow-primary);
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl), var(--shadow-glow-primary);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  padding: 16px 32px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid rgba(30, 27, 75, 0.1);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-smooth);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  background: white;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-accent {
+  background: var(--gradient-accent);
+  color: white;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-md), var(--shadow-glow-accent);
+  transition: all var(--transition-smooth);
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(230, 57, 70, 0.4);
+}
+
+/* Premium Card Styles */
+.card-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-glass);
+  transition: all var(--transition-smooth);
+}
+
+.card-glass:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-float);
+  border-color: rgba(230, 57, 70, 0.2);
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-accent {
+  background: rgba(230, 57, 70, 0.1);
+  color: var(--color-accent);
+  border: 1px solid rgba(230, 57, 70, 0.2);
+}
+
+.badge-primary {
+  background: rgba(30, 27, 75, 0.1);
+  color: var(--color-primary);
+  border: 1px solid rgba(30, 27, 75, 0.2);
+}
+
+/* Section Backgrounds */
+.section-gradient {
+  background: var(--gradient-mesh);
+}
+
+.section-dark {
+  background: var(--gradient-primary);
+}
+
+/* Decorative Elements */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blob-primary {
+  background: rgba(30, 27, 75, 0.08);
+}
+
+.blob-accent {
+  background: rgba(230, 57, 70, 0.08);
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-2);
+  }
+}
