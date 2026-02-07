@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import { COLORS } from '../constants/theme';
+import { COLORS, SHADOWS } from '../constants/theme';
 
 const Testimonials = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,6 +26,15 @@ const Testimonials = () => {
         },
     ];
 
+    // Auto-slide every 5 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [testimonials.length]);
+
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     };
@@ -36,28 +45,32 @@ const Testimonials = () => {
 
     return (
         <section id="testimonials" style={{
-            padding: '120px 24px',
-            backgroundColor: 'white',
+            padding: '140px 24px',
+            backgroundColor: COLORS.white,
         }}>
             <div style={{
                 maxWidth: '900px',
                 margin: '0 auto',
             }}>
                 {/* Header */}
-                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                        fontWeight: 400,
-                        color: '#1b1b1b',
-                        lineHeight: 1.15,
+                        fontSize: 'clamp(2.8rem, 5vw, 4rem)',
+                        fontWeight: 600,
+                        color: COLORS.dark,
+                        lineHeight: 1.1,
                         marginBottom: '20px',
-                        letterSpacing: '-0.02em',
+                        letterSpacing: '-0.03em',
                     }}>
-                        What parents say
+                        What parents{' '}
+                        <span style={{ color: COLORS.primary }}>say</span>
                     </h2>
                     <p style={{
                         fontSize: '1.25rem',
-                        color: '#54656f',
+                        color: COLORS.darkSecondary,
+                        maxWidth: '500px',
+                        margin: '0 auto',
+                        lineHeight: 1.7,
                     }}>
                         Real feedback from our academy families
                     </p>
@@ -66,7 +79,7 @@ const Testimonials = () => {
                 {/* Testimonial Carousel */}
                 <div style={{
                     position: 'relative',
-                    padding: '0 60px',
+                    padding: '0 70px',
                 }}>
                     {/* Navigation Arrows */}
                     <button
@@ -76,21 +89,27 @@ const Testimonials = () => {
                             left: '0',
                             top: '50%',
                             transform: 'translateY(-50%)',
-                            width: '48px',
-                            height: '48px',
+                            width: '56px',
+                            height: '56px',
                             borderRadius: '50%',
-                            background: '#f0f2f5',
-                            border: 'none',
+                            background: COLORS.white,
+                            border: `2px solid ${COLORS.dark}`,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             cursor: 'pointer',
-                            transition: 'background 0.3s ease',
+                            transition: 'all 0.3s ease',
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.background = '#e4e6e9'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = '#f0f2f5'}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.background = COLORS.primaryLight;
+                            e.currentTarget.style.boxShadow = SHADOWS.brutalist;
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.background = COLORS.white;
+                            e.currentTarget.style.boxShadow = 'none';
+                        }}
                     >
-                        <ChevronLeft size={24} color="#54656f" />
+                        <ChevronLeft size={24} color={COLORS.dark} />
                     </button>
 
                     <button
@@ -100,78 +119,99 @@ const Testimonials = () => {
                             right: '0',
                             top: '50%',
                             transform: 'translateY(-50%)',
-                            width: '48px',
-                            height: '48px',
+                            width: '56px',
+                            height: '56px',
                             borderRadius: '50%',
-                            background: '#f0f2f5',
-                            border: 'none',
+                            background: COLORS.white,
+                            border: `2px solid ${COLORS.dark}`,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             cursor: 'pointer',
-                            transition: 'background 0.3s ease',
+                            transition: 'all 0.3s ease',
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.background = '#e4e6e9'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = '#f0f2f5'}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.background = COLORS.primaryLight;
+                            e.currentTarget.style.boxShadow = SHADOWS.brutalist;
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.background = COLORS.white;
+                            e.currentTarget.style.boxShadow = 'none';
+                        }}
                     >
-                        <ChevronRight size={24} color="#54656f" />
+                        <ChevronRight size={24} color={COLORS.dark} />
                     </button>
 
                     {/* Testimonial Card */}
                     <div style={{
                         textAlign: 'center',
                         padding: '48px',
-                        background: '#f0f2f5',
+                        background: COLORS.primaryLight,
                         borderRadius: '24px',
+                        border: `2px solid ${COLORS.dark}`,
+                        boxShadow: SHADOWS.brutalist,
+                        overflow: 'hidden',
                     }}>
-                        <Quote size={40} color={COLORS.primary} style={{ marginBottom: '24px', opacity: 0.5 }} />
+                        {/* Animated Content Wrapper */}
+                        <div
+                            key={currentIndex}
+                            className="testimonial-content"
+                            style={{
+                                animation: 'fadeSlideIn 0.5s ease-out',
+                            }}
+                        >
+                            <Quote size={40} color={COLORS.primary} style={{ marginBottom: '24px' }} />
 
-                        <p style={{
-                            fontSize: '1.35rem',
-                            color: '#1b1b1b',
-                            lineHeight: 1.7,
-                            marginBottom: '32px',
-                            fontStyle: 'italic',
-                        }}>
-                            "{testimonials[currentIndex].quote}"
-                        </p>
-
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '16px',
-                        }}>
-                            <div style={{
-                                width: '56px',
-                                height: '56px',
-                                borderRadius: '50%',
-                                overflow: 'hidden',
+                            <p style={{
+                                fontSize: '1.35rem',
+                                color: COLORS.dark,
+                                lineHeight: 1.7,
+                                marginBottom: '32px',
+                                fontStyle: 'italic',
+                                fontWeight: 500,
                             }}>
-                                <img
-                                    src={testimonials[currentIndex].image}
-                                    alt={testimonials[currentIndex].name}
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover',
-                                    }}
-                                />
-                            </div>
-                            <div style={{ textAlign: 'left' }}>
-                                <h4 style={{
-                                    fontWeight: 600,
-                                    color: '#1b1b1b',
-                                    fontSize: '1.05rem',
+                                "{testimonials[currentIndex].quote}"
+                            </p>
+
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '16px',
+                            }}>
+                                <div style={{
+                                    width: '64px',
+                                    height: '64px',
+                                    borderRadius: '50%',
+                                    overflow: 'hidden',
+                                    border: `3px solid ${COLORS.dark}`,
+                                    boxShadow: '4px 4px 0px #1b1b1b',
                                 }}>
-                                    {testimonials[currentIndex].name}
-                                </h4>
-                                <span style={{
-                                    color: '#54656f',
-                                    fontSize: '0.9rem',
-                                }}>
-                                    {testimonials[currentIndex].relation}
-                                </span>
+                                    <img
+                                        src={testimonials[currentIndex].image}
+                                        alt={testimonials[currentIndex].name}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover',
+                                        }}
+                                    />
+                                </div>
+                                <div style={{ textAlign: 'left' }}>
+                                    <h4 style={{
+                                        fontWeight: 700,
+                                        color: COLORS.dark,
+                                        fontSize: '1.15rem',
+                                    }}>
+                                        {testimonials[currentIndex].name}
+                                    </h4>
+                                    <span style={{
+                                        color: COLORS.darkSecondary,
+                                        fontSize: '0.95rem',
+                                    }}>
+                                        {testimonials[currentIndex].relation}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -180,19 +220,19 @@ const Testimonials = () => {
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        gap: '8px',
-                        marginTop: '24px',
+                        gap: '12px',
+                        marginTop: '32px',
                     }}>
                         {testimonials.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => setCurrentIndex(index)}
                                 style={{
-                                    width: currentIndex === index ? '24px' : '8px',
-                                    height: '8px',
+                                    width: currentIndex === index ? '32px' : '12px',
+                                    height: '12px',
                                     borderRadius: '100px',
-                                    background: currentIndex === index ? COLORS.primary : '#d1d5db',
-                                    border: 'none',
+                                    background: currentIndex === index ? COLORS.primary : COLORS.light,
+                                    border: `2px solid ${COLORS.dark}`,
                                     cursor: 'pointer',
                                     transition: 'all 0.3s ease',
                                 }}
@@ -201,6 +241,46 @@ const Testimonials = () => {
                     </div>
                 </div>
             </div>
+
+            <style>{`
+                @keyframes fadeSlideIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                @media (max-width: 700px) {
+                    #testimonials {
+                        padding: 80px 16px !important;
+                    }
+                    #testimonials > div > div:nth-child(2) {
+                        padding: 0 50px !important;
+                    }
+                    #testimonials > div > div:nth-child(2) > button {
+                        width: 44px !important;
+                        height: 44px !important;
+                    }
+                    #testimonials > div > div:nth-child(2) > div:first-of-type {
+                        padding: 32px 24px !important;
+                    }
+                    #testimonials > div > div:nth-child(2) > div:first-of-type p {
+                        font-size: 1.1rem !important;
+                    }
+                }
+                @media (max-width: 500px) {
+                    #testimonials > div > div:nth-child(2) {
+                        padding: 0 !important;
+                    }
+                    #testimonials > div > div:nth-child(2) > button {
+                        display: none !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };
