@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from 'lucide-react';
-import { COLORS } from '../constants/theme';
+import { COLORS, SHADOWS } from '../constants/theme';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -26,30 +26,44 @@ const Contact = () => {
         { icon: Clock, label: 'Timings', value: 'Mon - Sat: 7 AM - 8 PM' },
     ];
 
+    const inputStyle = {
+        padding: '16px 20px',
+        borderRadius: '12px',
+        border: `2px solid ${COLORS.dark}`,
+        fontSize: '1rem',
+        outline: 'none',
+        transition: 'all 0.2s ease',
+        background: COLORS.white,
+    };
+
     return (
         <section id="contact" style={{
-            padding: '120px 24px',
-            backgroundColor: '#f0f2f5',
+            padding: '140px 24px',
+            backgroundColor: COLORS.white,
         }}>
             <div style={{
                 maxWidth: '1100px',
                 margin: '0 auto',
             }}>
                 {/* Header */}
-                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                        fontWeight: 400,
-                        color: '#1b1b1b',
-                        lineHeight: 1.15,
+                        fontSize: 'clamp(2.8rem, 5vw, 4rem)',
+                        fontWeight: 600,
+                        color: COLORS.dark,
+                        lineHeight: 1.1,
                         marginBottom: '20px',
-                        letterSpacing: '-0.02em',
+                        letterSpacing: '-0.03em',
                     }}>
-                        Get in touch
+                        Get in{' '}
+                        <span style={{ color: COLORS.primary }}>touch</span>
                     </h2>
                     <p style={{
                         fontSize: '1.25rem',
-                        color: '#54656f',
+                        color: COLORS.darkSecondary,
+                        maxWidth: '500px',
+                        margin: '0 auto',
+                        lineHeight: 1.7,
                     }}>
                         Ready to enroll? We'd love to hear from you
                     </p>
@@ -62,9 +76,11 @@ const Contact = () => {
                 }}>
                     {/* Contact Form */}
                     <div style={{
-                        background: 'white',
+                        background: COLORS.primaryLight,
                         padding: '40px',
                         borderRadius: '24px',
+                        border: `2px solid ${COLORS.dark}`,
+                        boxShadow: SHADOWS.brutalist,
                     }}>
                         {isSubmitted ? (
                             <div style={{
@@ -75,11 +91,24 @@ const Contact = () => {
                                 padding: '60px 20px',
                                 textAlign: 'center',
                             }}>
-                                <CheckCircle size={64} color={COLORS.primary} style={{ marginBottom: '20px' }} />
-                                <h4 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#1b1b1b', marginBottom: '8px' }}>
+                                <div style={{
+                                    width: '80px',
+                                    height: '80px',
+                                    borderRadius: '50%',
+                                    background: COLORS.white,
+                                    border: `3px solid ${COLORS.dark}`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginBottom: '20px',
+                                    boxShadow: '4px 4px 0px #1b1b1b',
+                                }}>
+                                    <CheckCircle size={40} color={COLORS.primary} />
+                                </div>
+                                <h4 style={{ fontSize: '1.5rem', fontWeight: 700, color: COLORS.dark, marginBottom: '8px' }}>
                                     Message Sent!
                                 </h4>
-                                <p style={{ color: '#54656f' }}>
+                                <p style={{ color: COLORS.darkSecondary, fontSize: '1.1rem' }}>
                                     We'll get back to you soon.
                                 </p>
                             </div>
@@ -91,16 +120,15 @@ const Contact = () => {
                                     required
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    style={{
-                                        padding: '16px 20px',
-                                        borderRadius: '12px',
-                                        border: '1px solid #e9edef',
-                                        fontSize: '1rem',
-                                        outline: 'none',
-                                        transition: 'border-color 0.2s ease',
+                                    style={inputStyle}
+                                    onFocus={(e) => {
+                                        e.target.style.borderColor = COLORS.primary;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
                                     }}
-                                    onFocus={(e) => e.target.style.borderColor = COLORS.primary}
-                                    onBlur={(e) => e.target.style.borderColor = '#e9edef'}
+                                    onBlur={(e) => {
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = 'none';
+                                    }}
                                 />
                                 <input
                                     type="tel"
@@ -108,45 +136,47 @@ const Contact = () => {
                                     required
                                     value={formData.phone}
                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                    style={{
-                                        padding: '16px 20px',
-                                        borderRadius: '12px',
-                                        border: '1px solid #e9edef',
-                                        fontSize: '1rem',
-                                        outline: 'none',
+                                    style={inputStyle}
+                                    onFocus={(e) => {
+                                        e.target.style.borderColor = COLORS.primary;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
                                     }}
-                                    onFocus={(e) => e.target.style.borderColor = COLORS.primary}
-                                    onBlur={(e) => e.target.style.borderColor = '#e9edef'}
+                                    onBlur={(e) => {
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = 'none';
+                                    }}
                                 />
                                 <input
                                     type="email"
                                     placeholder="Email Address"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    style={{
-                                        padding: '16px 20px',
-                                        borderRadius: '12px',
-                                        border: '1px solid #e9edef',
-                                        fontSize: '1rem',
-                                        outline: 'none',
+                                    style={inputStyle}
+                                    onFocus={(e) => {
+                                        e.target.style.borderColor = COLORS.primary;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
                                     }}
-                                    onFocus={(e) => e.target.style.borderColor = COLORS.primary}
-                                    onBlur={(e) => e.target.style.borderColor = '#e9edef'}
+                                    onBlur={(e) => {
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = 'none';
+                                    }}
                                 />
                                 <select
                                     value={formData.class}
                                     onChange={(e) => setFormData({ ...formData, class: e.target.value })}
                                     style={{
-                                        padding: '16px 20px',
-                                        borderRadius: '12px',
-                                        border: '1px solid #e9edef',
-                                        fontSize: '1rem',
-                                        outline: 'none',
-                                        background: 'white',
-                                        color: formData.class ? '#1b1b1b' : '#94a3b8',
+                                        ...inputStyle,
+                                        color: formData.class ? COLORS.dark : '#94a3b8',
+                                        cursor: 'pointer',
                                     }}
-                                    onFocus={(e) => e.target.style.borderColor = COLORS.primary}
-                                    onBlur={(e) => e.target.style.borderColor = '#e9edef'}
+                                    onFocus={(e) => {
+                                        e.target.style.borderColor = COLORS.primary;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
+                                    }}
+                                    onBlur={(e) => {
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = 'none';
+                                    }}
                                 >
                                     <option value="">Select Class</option>
                                     <option value="Jr. KG - Sr. KG">Jr. KG - Sr. KG</option>
@@ -160,16 +190,18 @@ const Contact = () => {
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                     style={{
-                                        padding: '16px 20px',
-                                        borderRadius: '12px',
-                                        border: '1px solid #e9edef',
-                                        fontSize: '1rem',
-                                        outline: 'none',
+                                        ...inputStyle,
                                         resize: 'vertical',
                                         fontFamily: 'inherit',
                                     }}
-                                    onFocus={(e) => e.target.style.borderColor = COLORS.primary}
-                                    onBlur={(e) => e.target.style.borderColor = '#e9edef'}
+                                    onFocus={(e) => {
+                                        e.target.style.borderColor = COLORS.primary;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
+                                    }}
+                                    onBlur={(e) => {
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = 'none';
+                                    }}
                                 />
                                 <button
                                     type="submit"
@@ -180,19 +212,22 @@ const Contact = () => {
                                         gap: '10px',
                                         padding: '16px 32px',
                                         borderRadius: '100px',
-                                        border: 'none',
-                                        background: COLORS.primary,
-                                        color: 'white',
+                                        border: `2px solid ${COLORS.dark}`,
+                                        background: COLORS.dark,
+                                        color: COLORS.white,
                                         fontSize: '1rem',
                                         fontWeight: 600,
                                         cursor: 'pointer',
-                                        transition: 'transform 0.2s ease, background 0.2s ease',
+                                        transition: 'all 0.2s ease',
+                                        marginTop: '8px',
                                     }}
                                     onMouseEnter={(e) => {
-                                        e.currentTarget.style.background = COLORS.primaryHover;
+                                        e.currentTarget.style.background = COLORS.white;
+                                        e.currentTarget.style.color = COLORS.dark;
                                     }}
                                     onMouseLeave={(e) => {
-                                        e.currentTarget.style.background = COLORS.primary;
+                                        e.currentTarget.style.background = COLORS.dark;
+                                        e.currentTarget.style.color = COLORS.white;
                                     }}
                                 >
                                     <Send size={18} />
@@ -208,21 +243,34 @@ const Contact = () => {
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                     }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             {contactInfo.map((info, index) => (
                                 <div key={index} style={{
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '20px',
                                     padding: '24px',
-                                    background: 'white',
+                                    background: COLORS.white,
                                     borderRadius: '16px',
-                                }}>
+                                    border: `2px solid ${COLORS.dark}`,
+                                    transition: 'all 0.3s ease',
+                                    cursor: 'default',
+                                }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.boxShadow = SHADOWS.brutalist;
+                                        e.currentTarget.style.transform = 'translate(-3px, -3px)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.boxShadow = 'none';
+                                        e.currentTarget.style.transform = 'translate(0, 0)';
+                                    }}
+                                >
                                     <div style={{
-                                        width: '48px',
-                                        height: '48px',
-                                        borderRadius: '12px',
+                                        width: '52px',
+                                        height: '52px',
+                                        borderRadius: '50%',
                                         background: COLORS.primaryLight,
+                                        border: `2px solid ${COLORS.dark}`,
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
@@ -233,16 +281,17 @@ const Contact = () => {
                                     <div>
                                         <span style={{
                                             fontSize: '0.85rem',
-                                            color: '#54656f',
+                                            color: COLORS.darkSecondary,
                                             display: 'block',
                                             marginBottom: '4px',
+                                            fontWeight: 500,
                                         }}>
                                             {info.label}
                                         </span>
                                         <span style={{
-                                            fontWeight: 500,
-                                            color: '#1b1b1b',
-                                            fontSize: '1rem',
+                                            fontWeight: 600,
+                                            color: COLORS.dark,
+                                            fontSize: '1.05rem',
                                         }}>
                                             {info.value}
                                         </span>
@@ -257,6 +306,8 @@ const Contact = () => {
                             height: '180px',
                             borderRadius: '16px',
                             overflow: 'hidden',
+                            border: `2px solid ${COLORS.dark}`,
+                            boxShadow: SHADOWS.brutalist,
                         }}>
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890"
@@ -273,9 +324,17 @@ const Contact = () => {
             </div>
 
             <style>{`
-                @media (max-width: 768px) {
+                @media (max-width: 900px) {
                     #contact > div > div:last-child {
                         grid-template-columns: 1fr !important;
+                    }
+                }
+                @media (max-width: 600px) {
+                    #contact {
+                        padding: 80px 16px !important;
+                    }
+                    #contact > div > div:last-child > div:first-child {
+                        padding: 32px 24px !important;
                     }
                 }
             `}</style>
