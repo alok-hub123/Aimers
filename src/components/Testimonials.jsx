@@ -1,266 +1,204 @@
-import React, { useRef } from 'react';
-import { Star, Quote } from 'lucide-react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Register plugins
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { COLORS } from '../constants/theme';
 
 const Testimonials = () => {
-    const sectionRef = useRef(null);
-    const headerRef = useRef(null);
-    const cardsRef = useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const reviews = [
+    const testimonials = [
         {
-            name: 'Priya Sharma',
-            role: 'Mother of Class 8 Student',
-            text: "Since joining Aimers, my son's confidence in Math has improved tremendously. The teachers are very patient and understanding.",
-            rating: 5,
-            initials: 'PS',
-            gradient: 'linear-gradient(135deg, #e63946 0%, #ff6b7a 100%)',
+            name: 'Mrs. Sharma',
+            relation: 'Parent of Priya (10th Std)',
+            quote: 'Aimers Academy transformed my daughter\'s approach to studies. The teachers are dedicated and the personal attention helped her score 98.5% in boards.',
+            image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200',
         },
         {
-            name: 'Rajesh Gupta',
-            role: 'Father of Class 10 Student',
-            text: "Excellent guidance for board exams. The conceptual clarity they provide is unmatched in other tuitions we tried.",
-            rating: 5,
-            initials: 'RG',
-            gradient: 'linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)',
+            name: 'Mr. Patel',
+            relation: 'Parent of Arjun (8th Std)',
+            quote: 'The small batch sizes and regular doubt sessions make all the difference. My son\'s confidence in Mathematics has improved tremendously.',
+            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
         },
         {
-            name: 'Sneha Patel',
-            role: 'Student, Class 9',
-            text: "I used to fear Science, but now I love it. The way they explain concepts with real examples makes it so easy!",
-            rating: 5,
-            initials: 'SP',
-            gradient: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)',
-        }
+            name: 'Mrs. Verma',
+            relation: 'Parent of Ananya (7th Std)',
+            quote: 'What I appreciate most is the regular communication and progress updates. The teachers genuinely care about each student\'s growth.',
+            image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200',
+        },
     ];
 
-    useGSAP(() => {
-        // Header entrance animation
-        gsap.from(headerRef.current.children, {
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: {
-                trigger: headerRef.current,
-                start: 'top 85%',
-                toggleActions: 'play none none none',
-            }
-        });
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    };
 
-        // Testimonial cards staggered entrance
-        gsap.from(cardsRef.current.children, {
-            y: 50,
-            opacity: 0,
-            scale: 0.95,
-            duration: 0.7,
-            stagger: 0.15,
-            ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: {
-                trigger: cardsRef.current,
-                start: 'top 80%',
-                toggleActions: 'play none none none',
-            }
-        });
-    }, { scope: sectionRef });
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    };
 
     return (
-        <section ref={sectionRef} id="testimonials" style={{
-            padding: '120px 0',
-            background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)',
-            backgroundSize: '200% 200%',
-            position: 'relative',
-            overflow: 'hidden',
+        <section id="testimonials" style={{
+            padding: '120px 24px',
+            backgroundColor: 'white',
         }}>
-            {/* Background Decorations */}
             <div style={{
-                position: 'absolute',
-                top: '-100px',
-                left: '-100px',
-                width: '400px',
-                height: '400px',
-                background: 'radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, transparent 70%)',
-                borderRadius: '50%',
-                pointerEvents: 'none',
-            }} />
-            <div style={{
-                position: 'absolute',
-                bottom: '-150px',
-                right: '-150px',
-                width: '500px',
-                height: '500px',
-                background: 'radial-gradient(circle, rgba(67, 56, 202, 0.2) 0%, transparent 70%)',
-                borderRadius: '50%',
-                pointerEvents: 'none',
-            }} />
-
-            {/* Grid Pattern Overlay */}
-            <div style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0)`,
-                backgroundSize: '32px 32px',
-                pointerEvents: 'none',
-            }} />
-
-            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                {/* Section Header */}
-                <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '72px' }}>
-                    <div style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '10px 20px',
-                        borderRadius: '100px',
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        border: '1px solid rgba(255, 255, 255, 0.15)',
-                        marginBottom: '24px',
-                    }}>
-                        <Star size={16} color="#fbbf24" fill="#fbbf24" />
-                        <span style={{
-                            color: 'rgba(255, 255, 255, 0.9)',
-                            fontSize: '0.875rem',
-                            fontWeight: 600,
-                            letterSpacing: '0.05em',
-                            textTransform: 'uppercase',
-                        }}>
-                            Testimonials
-                        </span>
-                    </div>
+                maxWidth: '900px',
+                margin: '0 auto',
+            }}>
+                {/* Header */}
+                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2rem, 4vw, 3rem)',
-                        fontWeight: 800,
-                        color: 'white',
+                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                        fontWeight: 400,
+                        color: '#1b1b1b',
+                        lineHeight: 1.15,
                         marginBottom: '20px',
                         letterSpacing: '-0.02em',
                     }}>
-                        Trusted by{' '}
-                        <span style={{
-                            background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                        }}>
-                            Parents & Students
-                        </span>
+                        What parents say
                     </h2>
                     <p style={{
-                        color: 'rgba(255, 255, 255, 0.6)',
-                        fontSize: '1.15rem',
-                        maxWidth: '500px',
-                        margin: '0 auto',
+                        fontSize: '1.25rem',
+                        color: '#54656f',
                     }}>
-                        See what our community says about their experience with us.
+                        Real feedback from our academy families
                     </p>
                 </div>
 
-                {/* Testimonial Cards */}
-                <div ref={cardsRef} style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                    gap: '28px',
+                {/* Testimonial Carousel */}
+                <div style={{
+                    position: 'relative',
+                    padding: '0 60px',
                 }}>
-                    {reviews.map((review, idx) => (
-                        <div key={idx} style={{
-                            background: 'rgba(255, 255, 255, 0.08)',
-                            backdropFilter: 'blur(20px)',
-                            WebkitBackdropFilter: 'blur(20px)',
-                            padding: '36px',
-                            borderRadius: 'var(--radius-xl)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            transition: 'all 0.4s ease',
-                            position: 'relative',
+                    {/* Navigation Arrows */}
+                    <button
+                        onClick={prevSlide}
+                        style={{
+                            position: 'absolute',
+                            left: '0',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            width: '48px',
+                            height: '48px',
+                            borderRadius: '50%',
+                            background: '#f0f2f5',
+                            border: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            transition: 'background 0.3s ease',
                         }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-8px)';
-                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
-                                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                            }}
-                        >
-                            {/* Quote Icon */}
+                        onMouseEnter={(e) => e.currentTarget.style.background = '#e4e6e9'}
+                        onMouseLeave={(e) => e.currentTarget.style.background = '#f0f2f5'}
+                    >
+                        <ChevronLeft size={24} color="#54656f" />
+                    </button>
+
+                    <button
+                        onClick={nextSlide}
+                        style={{
+                            position: 'absolute',
+                            right: '0',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            width: '48px',
+                            height: '48px',
+                            borderRadius: '50%',
+                            background: '#f0f2f5',
+                            border: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            transition: 'background 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.background = '#e4e6e9'}
+                        onMouseLeave={(e) => e.currentTarget.style.background = '#f0f2f5'}
+                    >
+                        <ChevronRight size={24} color="#54656f" />
+                    </button>
+
+                    {/* Testimonial Card */}
+                    <div style={{
+                        textAlign: 'center',
+                        padding: '48px',
+                        background: '#f0f2f5',
+                        borderRadius: '24px',
+                    }}>
+                        <Quote size={40} color={COLORS.primary} style={{ marginBottom: '24px', opacity: 0.5 }} />
+
+                        <p style={{
+                            fontSize: '1.35rem',
+                            color: '#1b1b1b',
+                            lineHeight: 1.7,
+                            marginBottom: '32px',
+                            fontStyle: 'italic',
+                        }}>
+                            "{testimonials[currentIndex].quote}"
+                        </p>
+
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '16px',
+                        }}>
                             <div style={{
-                                position: 'absolute',
-                                top: '24px',
-                                right: '24px',
-                                opacity: 0.15,
+                                width: '56px',
+                                height: '56px',
+                                borderRadius: '50%',
+                                overflow: 'hidden',
                             }}>
-                                <Quote size={40} color="white" />
+                                <img
+                                    src={testimonials[currentIndex].image}
+                                    alt={testimonials[currentIndex].name}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                    }}
+                                />
                             </div>
-
-                            {/* Stars */}
-                            <div style={{ display: 'flex', gap: '4px', marginBottom: '20px' }}>
-                                {[...Array(review.rating)].map((_, i) => (
-                                    <Star
-                                        key={i}
-                                        size={18}
-                                        fill="#fbbf24"
-                                        color="#fbbf24"
-                                        style={{
-                                            filter: 'drop-shadow(0 0 4px rgba(251, 191, 36, 0.4))'
-                                        }}
-                                    />
-                                ))}
-                            </div>
-
-                            {/* Quote Text */}
-                            <p style={{
-                                fontSize: '1.1rem',
-                                lineHeight: 1.7,
-                                marginBottom: '28px',
-                                color: 'rgba(255, 255, 255, 0.9)',
-                                fontWeight: 400,
-                            }}>
-                                "{review.text}"
-                            </p>
-
-                            {/* Author */}
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                                <div style={{
-                                    width: '48px',
-                                    height: '48px',
-                                    borderRadius: '50%',
-                                    background: review.gradient,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'white',
-                                    fontWeight: 700,
-                                    fontSize: '0.95rem',
-                                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
+                            <div style={{ textAlign: 'left' }}>
+                                <h4 style={{
+                                    fontWeight: 600,
+                                    color: '#1b1b1b',
+                                    fontSize: '1.05rem',
                                 }}>
-                                    {review.initials}
-                                </div>
-                                <div>
-                                    <div style={{
-                                        fontWeight: 600,
-                                        fontSize: '1rem',
-                                        color: 'white',
-                                    }}>
-                                        {review.name}
-                                    </div>
-                                    <div style={{
-                                        fontSize: '0.875rem',
-                                        color: 'rgba(255, 255, 255, 0.5)',
-                                    }}>
-                                        {review.role}
-                                    </div>
-                                </div>
+                                    {testimonials[currentIndex].name}
+                                </h4>
+                                <span style={{
+                                    color: '#54656f',
+                                    fontSize: '0.9rem',
+                                }}>
+                                    {testimonials[currentIndex].relation}
+                                </span>
                             </div>
                         </div>
-                    ))}
+                    </div>
+
+                    {/* Dots */}
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        marginTop: '24px',
+                    }}>
+                        {testimonials.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentIndex(index)}
+                                style={{
+                                    width: currentIndex === index ? '24px' : '8px',
+                                    height: '8px',
+                                    borderRadius: '100px',
+                                    background: currentIndex === index ? COLORS.primary : '#d1d5db',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s ease',
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

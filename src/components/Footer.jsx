@@ -1,131 +1,86 @@
-import React, { useRef } from 'react';
-import { Facebook, Instagram, Phone, Mail, MapPin, Heart, ArrowUpRight } from 'lucide-react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Register plugins
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+import React from 'react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { COLORS } from '../constants/theme';
 
 const Footer = () => {
-    const footerRef = useRef(null);
-    const columnsRef = useRef(null);
+    const quickLinks = [
+        { label: 'About Us', href: '#about' },
+        { label: 'Classes', href: '#classes' },
+        { label: 'Faculty', href: '#faculty' },
+        { label: 'Contact', href: '#contact' },
+    ];
 
-    useGSAP(() => {
-        // Footer columns staggered entrance
-        gsap.from(columnsRef.current.children, {
-            y: 40,
-            opacity: 0,
-            duration: 0.7,
-            stagger: 0.15,
-            ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: {
-                trigger: footerRef.current,
-                start: 'top 90%',
-                toggleActions: 'play none none none',
-            }
-        });
-    }, { scope: footerRef });
+    const resources = [
+        { label: 'FAQ', href: '#faq' },
+        { label: 'Testimonials', href: '#testimonials' },
+        { label: 'Facilities', href: '#facilities' },
+        { label: 'Methodology', href: '#methodology' },
+    ];
+
+    const social = [
+        { icon: Facebook, href: '#' },
+        { icon: Instagram, href: '#' },
+        { icon: Youtube, href: '#' },
+        { icon: Twitter, href: '#' },
+    ];
 
     return (
-        <footer ref={footerRef} style={{
-            background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)',
-            padding: '80px 0 32px 0',
-            position: 'relative',
+        <footer style={{
+            backgroundColor: '#1b1b1b',
+            padding: '80px 24px 32px',
+            color: 'white',
         }}>
-            {/* Gradient Top Border */}
             <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: '4px',
-                background: 'linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 50%, var(--color-primary) 100%)',
-            }} />
-
-            <div className="container">
-                <div ref={columnsRef} style={{
+                maxWidth: '1200px',
+                margin: '0 auto',
+            }}>
+                {/* Footer Content */}
+                <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                    gridTemplateColumns: '2fr 1fr 1fr 1.5fr',
                     gap: '48px',
-                    marginBottom: '64px',
+                    marginBottom: '60px',
                 }}>
-                    {/* Brand Column */}
-                    <div style={{ maxWidth: '320px' }}>
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '12px',
-                            marginBottom: '24px'
+                    {/* Brand */}
+                    <div>
+                        <h3 style={{
+                            fontSize: '1.5rem',
+                            fontWeight: 600,
+                            marginBottom: '20px',
+                            color: 'white',
                         }}>
-                            <div style={{
-                                width: '44px',
-                                height: '44px',
-                                borderRadius: 'var(--radius-md)',
-                                overflow: 'hidden',
-                                boxShadow: '0 4px 12px rgba(30, 27, 75, 0.15)',
-                            }}>
-                                <img
-                                    src="/aimers-logo.jpg"
-                                    alt="Aimers Academy"
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                />
-                            </div>
-                            <span style={{
-                                fontSize: '1.25rem',
-                                fontWeight: 700,
-                                background: 'linear-gradient(135deg, var(--color-primary) 0%, #4338ca 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text',
-                            }}>
-                                Aimers Academy
-                            </span>
-                        </div>
+                            Aimers Academy
+                        </h3>
                         <p style={{
-                            color: 'var(--color-text-muted)',
-                            fontSize: '0.95rem',
+                            color: 'rgba(255,255,255,0.6)',
                             lineHeight: 1.7,
                             marginBottom: '24px',
+                            maxWidth: '280px',
                         }}>
-                            Building strong foundations for tomorrow's achievers through personalized tuition and expert mentorship.
+                            Empowering students with quality education since 2014.
                         </p>
-
-                        {/* Social Links */}
-                        <div style={{ display: 'flex', gap: '12px' }}>
-                            {[
-                                { icon: <Facebook size={18} />, href: '#', color: '#1877f2' },
-                                { icon: <Instagram size={18} />, href: '#', color: '#e4405f' },
-                            ].map((social, idx) => (
+                        <div style={{
+                            display: 'flex',
+                            gap: '12px',
+                        }}>
+                            {social.map((item, index) => (
                                 <a
-                                    key={idx}
-                                    href={social.href}
+                                    key={index}
+                                    href={item.href}
                                     style={{
-                                        width: '42px',
-                                        height: '42px',
-                                        borderRadius: 'var(--radius-md)',
-                                        background: 'white',
+                                        width: '40px',
+                                        height: '40px',
+                                        borderRadius: '10px',
+                                        background: 'rgba(255,255,255,0.1)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        color: 'var(--color-text-muted)',
-                                        boxShadow: '0 2px 8px rgba(30, 27, 75, 0.08)',
-                                        border: '1px solid rgba(241, 245, 249, 1)',
-                                        transition: 'all 0.3s ease',
+                                        transition: 'background 0.3s ease',
                                     }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.color = social.color;
-                                        e.currentTarget.style.transform = 'translateY(-3px)';
-                                        e.currentTarget.style.boxShadow = `0 8px 20px ${social.color}25`;
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.color = 'var(--color-text-muted)';
-                                        e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(30, 27, 75, 0.08)';
-                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.background = COLORS.primary}
+                                    onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
                                 >
-                                    {social.icon}
+                                    <item.icon size={18} color="white" />
                                 </a>
                             ))}
                         </div>
@@ -134,157 +89,144 @@ const Footer = () => {
                     {/* Quick Links */}
                     <div>
                         <h4 style={{
-                            fontSize: '1rem',
-                            fontWeight: 700,
-                            color: 'var(--color-text-main)',
-                            marginBottom: '24px',
-                            letterSpacing: '0.02em',
+                            fontSize: '0.85rem',
+                            fontWeight: 600,
+                            color: 'rgba(255,255,255,0.5)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.1em',
+                            marginBottom: '20px',
                         }}>
                             Quick Links
                         </h4>
-                        <ul style={{
-                            listStyle: 'none',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '14px',
-                        }}>
-                            {[
-                                { name: 'Home', href: '#hero' },
-                                { name: 'Classes', href: '#classes' },
-                                { name: 'Testimonials', href: '#testimonials' },
-                                { name: 'Our Approach', href: '#approach' },
-                            ].map((link, idx) => (
-                                <li key={idx}>
-                                    <a
-                                        href={link.href}
-                                        style={{
-                                            color: 'var(--color-text-muted)',
-                                            fontSize: '0.95rem',
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            gap: '6px',
-                                            transition: 'all 0.2s ease',
-                                        }}
-                                        onMouseEnter={(e) => {
-                                            e.currentTarget.style.color = 'var(--color-primary)';
-                                            e.currentTarget.style.gap = '10px';
-                                        }}
-                                        onMouseLeave={(e) => {
-                                            e.currentTarget.style.color = 'var(--color-text-muted)';
-                                            e.currentTarget.style.gap = '6px';
-                                        }}
-                                    >
-                                        {link.name}
-                                        <ArrowUpRight size={14} style={{ opacity: 0.5 }} />
-                                    </a>
-                                </li>
+                        <nav style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            {quickLinks.map((link, index) => (
+                                <a
+                                    key={index}
+                                    href={link.href}
+                                    style={{
+                                        color: 'rgba(255,255,255,0.7)',
+                                        textDecoration: 'none',
+                                        transition: 'color 0.2s ease',
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.color = COLORS.primary}
+                                    onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
+                                >
+                                    {link.label}
+                                </a>
                             ))}
-                        </ul>
+                        </nav>
                     </div>
 
-                    {/* Contact */}
+                    {/* Resources */}
                     <div>
                         <h4 style={{
-                            fontSize: '1rem',
-                            fontWeight: 700,
-                            color: 'var(--color-text-main)',
-                            marginBottom: '24px',
-                            letterSpacing: '0.02em',
+                            fontSize: '0.85rem',
+                            fontWeight: 600,
+                            color: 'rgba(255,255,255,0.5)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.1em',
+                            marginBottom: '20px',
                         }}>
-                            Contact Us
+                            Resources
                         </h4>
-                        <ul style={{
-                            listStyle: 'none',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '18px',
-                        }}>
-                            {[
-                                { icon: <Phone size={18} />, text: '+91 98765 43210', color: '#10b981' },
-                                { icon: <Mail size={18} />, text: 'admissions@aimers.com', color: '#3b82f6' },
-                                { icon: <MapPin size={18} />, text: '123, Knowledge Park, City Center', color: '#e63946' },
-                            ].map((item, idx) => (
-                                <li key={idx} style={{
-                                    display: 'flex',
-                                    gap: '14px',
-                                    alignItems: 'flex-start',
-                                }}>
-                                    <div style={{
-                                        width: '36px',
-                                        height: '36px',
-                                        borderRadius: 'var(--radius-sm)',
-                                        background: `${item.color}12`,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        color: item.color,
-                                        flexShrink: 0,
-                                    }}>
-                                        {item.icon}
-                                    </div>
-                                    <span style={{
-                                        color: 'var(--color-text-muted)',
-                                        fontSize: '0.95rem',
-                                        paddingTop: '6px',
-                                    }}>
-                                        {item.text}
-                                    </span>
-                                </li>
+                        <nav style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            {resources.map((link, index) => (
+                                <a
+                                    key={index}
+                                    href={link.href}
+                                    style={{
+                                        color: 'rgba(255,255,255,0.7)',
+                                        textDecoration: 'none',
+                                        transition: 'color 0.2s ease',
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.color = COLORS.primary}
+                                    onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
+                                >
+                                    {link.label}
+                                </a>
                             ))}
-                        </ul>
+                        </nav>
+                    </div>
+
+                    {/* Contact Info */}
+                    <div>
+                        <h4 style={{
+                            fontSize: '0.85rem',
+                            fontWeight: 600,
+                            color: 'rgba(255,255,255,0.5)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.1em',
+                            marginBottom: '20px',
+                        }}>
+                            Contact
+                        </h4>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                                <MapPin size={18} color={COLORS.primary} style={{ flexShrink: 0, marginTop: '3px' }} />
+                                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem' }}>
+                                    123 Education Street, Mumbai 400001
+                                </span>
+                            </div>
+                            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                                <Phone size={18} color={COLORS.primary} />
+                                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem' }}>
+                                    +91 98765 43210
+                                </span>
+                            </div>
+                            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                                <Mail size={18} color={COLORS.primary} />
+                                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem' }}>
+                                    info@aimersacademy.com
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
+                {/* Divider */}
+                <div style={{
+                    height: '1px',
+                    background: 'rgba(255,255,255,0.1)',
+                    marginBottom: '32px',
+                }} />
+
+                {/* Bottom */}
                 <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    borderTop: '1px solid rgba(226, 232, 240, 1)',
-                    paddingTop: '28px',
                     flexWrap: 'wrap',
                     gap: '16px',
                 }}>
-                    <div style={{
-                        fontSize: '0.875rem',
-                        color: 'var(--color-text-light)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px',
+                    <p style={{
+                        color: 'rgba(255,255,255,0.5)',
+                        fontSize: '0.9rem',
                     }}>
-                        &copy; {new Date().getFullYear()} Aimers Academy. Made with
-                        <Heart size={14} fill="#e63946" color="#e63946" />
-                    </div>
-                    <div style={{
-                        display: 'flex',
-                        gap: '24px',
-                        fontSize: '0.875rem',
-                    }}>
-                        <a
-                            href="#"
-                            style={{
-                                color: 'var(--color-text-light)',
-                                transition: 'color 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'}
-                            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-light)'}
-                        >
+                        © 2026 Aimers Academy. All rights reserved.
+                    </p>
+                    <div style={{ display: 'flex', gap: '24px' }}>
+                        <a href="#" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>
                             Privacy Policy
                         </a>
-                        <a
-                            href="#"
-                            style={{
-                                color: 'var(--color-text-light)',
-                                transition: 'color 0.2s ease',
-                            }}
-                            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'}
-                            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-light)'}
-                        >
+                        <a href="#" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>
                             Terms of Service
                         </a>
                     </div>
                 </div>
             </div>
+
+            <style>{`
+                @media (max-width: 768px) {
+                    footer > div > div:first-child {
+                        grid-template-columns: 1fr 1fr !important;
+                    }
+                }
+                @media (max-width: 480px) {
+                    footer > div > div:first-child {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            `}</style>
         </footer>
     );
 };

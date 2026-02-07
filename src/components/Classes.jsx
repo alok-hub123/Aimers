@@ -1,288 +1,197 @@
-import React, { useRef } from 'react';
-import { GraduationCap, BookOpen, Lightbulb, Target } from 'lucide-react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Register plugins
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+import React, { useState } from 'react';
+import { Check, ArrowRight } from 'lucide-react';
+import { COLORS } from '../constants/theme';
 
 const Classes = () => {
-    const sectionRef = useRef(null);
-    const headerRef = useRef(null);
-    const cardsRef = useRef(null);
+    const [activeTab, setActiveTab] = useState('primary');
 
-    const offerings = [
-        {
-            grade: 'Junior KG – UKG',
-            title: 'Foundational Learning',
-            desc: 'Play-based learning to spark curiosity and build strong basic skills in reading and numbers.',
-            icon: <Lightbulb size={24} />,
-            gradient: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
-            accentColor: '#f59e0b',
+    const classCategories = {
+        primary: {
+            label: 'Primary',
+            subtitle: 'Jr. KG - 5th Std',
+            classes: [
+                { name: 'Jr. KG', subjects: 'All Subjects', fee: '₹1,500' },
+                { name: 'Sr. KG', subjects: 'All Subjects', fee: '₹1,500' },
+                { name: '1st - 2nd', subjects: 'All Subjects', fee: '₹1,800' },
+                { name: '3rd - 4th', subjects: 'All Subjects', fee: '₹2,000' },
+                { name: '5th Std', subjects: 'All Subjects', fee: '₹2,200' },
+            ],
         },
-        {
-            grade: 'Classes 1 – 5',
-            title: 'Core Concepts',
-            desc: 'Focus on literacy, numeracy, and environmental awareness to create a solid academic base.',
-            icon: <BookOpen size={24} />,
-            gradient: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)',
-            accentColor: '#10b981',
+        middle: {
+            label: 'Middle',
+            subtitle: '6th - 8th Std',
+            classes: [
+                { name: '6th Std', subjects: 'Maths, Science, English', fee: '₹2,500' },
+                { name: '7th Std', subjects: 'Maths, Science, English', fee: '₹2,500' },
+                { name: '8th Std', subjects: 'Maths, Science, English', fee: '₹2,800' },
+            ],
         },
-        {
-            grade: 'Classes 6 – 8',
-            title: 'Academic Strengthening',
-            desc: 'In-depth subject knowledge, critical thinking, and preparation for rigorous high school curriculum.',
-            icon: <GraduationCap size={24} />,
-            gradient: 'linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)',
-            accentColor: '#3b82f6',
+        secondary: {
+            label: 'Secondary',
+            subtitle: '9th - 10th Std',
+            classes: [
+                { name: '9th Std', subjects: 'Maths, Science', fee: '₹3,500' },
+                { name: '10th Board', subjects: 'Maths, Science', fee: '₹4,000' },
+            ],
         },
-        {
-            grade: 'Classes 9 – 10',
-            title: 'Board Exam Prep',
-            desc: 'Intensive coaching, exam strategies, and regular mock tests to ensure top performance in boards.',
-            icon: <Target size={24} />,
-            gradient: 'linear-gradient(135deg, #e63946 0%, #ff6b7a 100%)',
-            accentColor: '#e63946',
-        }
+    };
+
+    const includes = [
+        'All study materials',
+        'Weekly tests',
+        'Doubt sessions',
+        'Progress reports',
     ];
 
-    useGSAP(() => {
-        // Header entrance animation
-        gsap.from(headerRef.current.children, {
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: {
-                trigger: headerRef.current,
-                start: 'top 85%',
-                toggleActions: 'play none none none',
-            }
-        });
-
-        // Offering cards staggered entrance
-        gsap.from(cardsRef.current.children, {
-            y: 60,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.12,
-            ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: {
-                trigger: cardsRef.current,
-                start: 'top 80%',
-                toggleActions: 'play none none none',
-            }
-        });
-    }, { scope: sectionRef });
-
     return (
-        <section ref={sectionRef} id="classes" style={{
-            padding: '120px 0',
-            background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%)',
-            position: 'relative',
-            overflow: 'hidden',
+        <section id="classes" style={{
+            padding: '120px 24px',
+            backgroundColor: '#f0f2f5',
         }}>
-            {/* Background Decorations */}
             <div style={{
-                position: 'absolute',
-                top: '-200px',
-                right: '-200px',
-                width: '500px',
-                height: '500px',
-                background: 'radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)',
-                borderRadius: '50%',
-                pointerEvents: 'none',
-            }} />
-            <div style={{
-                position: 'absolute',
-                bottom: '-150px',
-                left: '-150px',
-                width: '400px',
-                height: '400px',
-                background: 'radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 70%)',
-                borderRadius: '50%',
-                pointerEvents: 'none',
-            }} />
-
-            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                {/* Section Header */}
-                <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '80px' }}>
-                    <div style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '10px 20px',
-                        borderRadius: '100px',
-                        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%)',
-                        border: '1px solid rgba(59, 130, 246, 0.15)',
-                        marginBottom: '24px',
-                    }}>
-                        <GraduationCap size={16} color="#3b82f6" />
-                        <span style={{
-                            color: '#3b82f6',
-                            fontSize: '0.875rem',
-                            fontWeight: 600,
-                            letterSpacing: '0.05em',
-                            textTransform: 'uppercase',
-                        }}>
-                            Our Programs
-                        </span>
-                    </div>
+                maxWidth: '1000px',
+                margin: '0 auto',
+            }}>
+                {/* Header */}
+                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2rem, 4vw, 3rem)',
-                        fontWeight: 800,
-                        color: 'var(--color-primary)',
+                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                        fontWeight: 400,
+                        color: '#1b1b1b',
+                        lineHeight: 1.15,
                         marginBottom: '20px',
                         letterSpacing: '-0.02em',
                     }}>
-                        Classes We{' '}
-                        <span style={{
-                            background: 'linear-gradient(135deg, #3b82f6 0%, #10b981 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                        }}>
-                            Offer
-                        </span>
+                        Classes & Fee Structure
                     </h2>
                     <p style={{
-                        color: 'var(--color-text-muted)',
-                        fontSize: '1.15rem',
-                        maxWidth: '550px',
-                        margin: '0 auto',
-                        lineHeight: 1.7,
+                        fontSize: '1.25rem',
+                        color: '#54656f',
                     }}>
-                        Tailored curriculum for every stage of your child's growth.
+                        Affordable fees with quality education
                     </p>
                 </div>
 
-                {/* Cards Grid */}
-                <div ref={cardsRef} style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                    gap: '28px',
+                {/* Tabs */}
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    marginBottom: '48px',
+                    background: 'white',
+                    padding: '8px',
+                    borderRadius: '100px',
+                    width: 'fit-content',
+                    margin: '0 auto 48px',
                 }}>
-                    {offerings.map((item, idx) => (
-                        <div
-                            key={idx}
+                    {Object.entries(classCategories).map(([key, category]) => (
+                        <button
+                            key={key}
+                            onClick={() => setActiveTab(key)}
                             style={{
-                                background: 'rgba(255, 255, 255, 0.85)',
-                                backdropFilter: 'blur(20px)',
-                                WebkitBackdropFilter: 'blur(20px)',
-                                borderRadius: 'var(--radius-xl)',
-                                padding: '0',
-                                position: 'relative',
-                                overflow: 'hidden',
-                                boxShadow: '0 4px 24px rgba(30, 27, 75, 0.06)',
-                                border: '1px solid rgba(255, 255, 255, 0.9)',
-                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-10px) scale(1.01)';
-                                e.currentTarget.style.boxShadow = `0 24px 48px rgba(30, 27, 75, 0.12), 0 0 0 1px ${item.accentColor}20`;
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                                e.currentTarget.style.boxShadow = '0 4px 24px rgba(30, 27, 75, 0.06)';
+                                padding: '12px 32px',
+                                borderRadius: '100px',
+                                border: 'none',
+                                background: activeTab === key ? COLORS.primary : 'transparent',
+                                color: activeTab === key ? 'white' : '#54656f',
+                                fontWeight: 500,
+                                fontSize: '1rem',
+                                cursor: 'pointer',
+                                transition: 'all 0.3s ease',
                             }}
                         >
-                            {/* Gradient Top Strip */}
-                            <div style={{
-                                height: '5px',
-                                background: item.gradient,
-                            }} />
+                            {category.label}
+                        </button>
+                    ))}
+                </div>
 
-                            {/* Content */}
-                            <div style={{ padding: '32px' }}>
-                                {/* Icon & Grade */}
-                                <div style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    marginBottom: '20px',
-                                }}>
-                                    <div style={{
-                                        width: '52px',
-                                        height: '52px',
-                                        borderRadius: 'var(--radius-md)',
-                                        background: item.gradient,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        color: 'white',
-                                        boxShadow: `0 8px 20px ${item.accentColor}30`,
-                                    }}>
-                                        {item.icon}
-                                    </div>
-                                    <div style={{
-                                        padding: '8px 14px',
-                                        borderRadius: 'var(--radius-full)',
-                                        background: `${item.accentColor}12`,
-                                        border: `1px solid ${item.accentColor}20`,
-                                    }}>
-                                        <span style={{
-                                            fontSize: '0.75rem',
-                                            fontWeight: 700,
-                                            textTransform: 'uppercase',
-                                            color: item.accentColor,
-                                            letterSpacing: '0.05em',
-                                        }}>
-                                            {item.grade}
-                                        </span>
-                                    </div>
-                                </div>
+                {/* Fee Table */}
+                <div style={{
+                    background: 'white',
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                }}>
+                    {/* Table Header */}
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 1.5fr 120px',
+                        padding: '20px 32px',
+                        background: '#f8f9fa',
+                        borderBottom: '1px solid #e9edef',
+                    }}>
+                        <span style={{ fontWeight: 600, color: '#54656f', fontSize: '0.9rem' }}>CLASS</span>
+                        <span style={{ fontWeight: 600, color: '#54656f', fontSize: '0.9rem' }}>SUBJECTS</span>
+                        <span style={{ fontWeight: 600, color: '#54656f', fontSize: '0.9rem', textAlign: 'right' }}>FEE/MONTH</span>
+                    </div>
 
-                                {/* Title & Description */}
-                                <h3 style={{
-                                    fontSize: '1.35rem',
-                                    fontWeight: 700,
-                                    color: 'var(--color-text-main)',
-                                    marginBottom: '14px',
-                                    letterSpacing: '-0.01em',
-                                }}>
-                                    {item.title}
-                                </h3>
-                                <p style={{
-                                    color: 'var(--color-text-muted)',
-                                    lineHeight: 1.7,
-                                    fontSize: '0.95rem',
-                                }}>
-                                    {item.desc}
-                                </p>
-
-                                {/* Learn More Link */}
-                                <div style={{
-                                    marginTop: '24px',
-                                    paddingTop: '20px',
-                                    borderTop: '1px solid rgba(241, 245, 249, 1)',
-                                }}>
-                                    <a
-                                        href="#"
-                                        style={{
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            gap: '8px',
-                                            color: item.accentColor,
-                                            fontWeight: 600,
-                                            fontSize: '0.9rem',
-                                            transition: 'gap 0.3s ease',
-                                        }}
-                                        onMouseEnter={(e) => e.currentTarget.style.gap = '12px'}
-                                        onMouseLeave={(e) => e.currentTarget.style.gap = '8px'}
-                                    >
-                                        Learn More
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M5 12h14M12 5l7 7-7 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
+                    {/* Table Body */}
+                    {classCategories[activeTab].classes.map((classItem, index) => (
+                        <div
+                            key={index}
+                            style={{
+                                display: 'grid',
+                                gridTemplateColumns: '1fr 1.5fr 120px',
+                                padding: '24px 32px',
+                                borderBottom: index < classCategories[activeTab].classes.length - 1 ? '1px solid #e9edef' : 'none',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <span style={{ fontWeight: 600, color: '#1b1b1b', fontSize: '1.05rem' }}>
+                                {classItem.name}
+                            </span>
+                            <span style={{ color: '#54656f' }}>
+                                {classItem.subjects}
+                            </span>
+                            <span style={{ fontWeight: 700, color: COLORS.primary, fontSize: '1.1rem', textAlign: 'right' }}>
+                                {classItem.fee}
+                            </span>
                         </div>
                     ))}
+
+                    {/* Footer - What's Included */}
+                    <div style={{
+                        padding: '24px 32px',
+                        background: '#f8f9fa',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '32px',
+                        flexWrap: 'wrap',
+                    }}>
+                        {includes.map((item, index) => (
+                            <div key={index} style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                            }}>
+                                <Check size={16} color={COLORS.primary} />
+                                <span style={{ color: '#54656f', fontSize: '0.9rem' }}>{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* CTA */}
+                <div style={{ textAlign: 'center', marginTop: '48px' }}>
+                    <a
+                        href="#contact"
+                        style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            padding: '16px 32px',
+                            background: '#1b1b1b',
+                            color: 'white',
+                            borderRadius: '100px',
+                            fontWeight: 600,
+                            textDecoration: 'none',
+                            transition: 'transform 0.2s ease',
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    >
+                        Enroll Now <ArrowRight size={18} />
+                    </a>
                 </div>
             </div>
         </section>

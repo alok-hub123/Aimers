@@ -1,30 +1,56 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Features from './components/Features';
+import AboutUs from './components/AboutUs';
+import Achievements from './components/Achievements';
+import WhyChoose from './components/WhyChoose';
+import Facilities from './components/Facilities';
+import Methodology from './components/Methodology';
 import Classes from './components/Classes';
-import Approach from './components/Approach';
+import Faculty from './components/Faculty';
+import FAQ from './components/FAQ';
 import Testimonials from './components/Testimonials';
-import CTA from './components/CTA';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
-import HeroParallex from './components/HeroParallex';
 import './App.css';
 
 function App() {
-  // Note: GSAP ScrollTrigger in each component now handles scroll animations
-  // No need for IntersectionObserver
-
   return (
     <div className="App">
       <Navbar />
       <main>
-        {/* <Hero /> */}
-        <HeroParallex />
-        <Features />
+        {/* 1. Hero - Image Carousel */}
+        <Hero />
+
+        {/* 2. About Us */}
+        <AboutUs />
+
+        {/* 3. Achievements - Stats & Toppers */}
+        <Achievements />
+
+        {/* 4. Why Choose Us */}
+        <WhyChoose />
+
+        {/* 5. Facilities */}
+        <Facilities />
+
+        {/* 6. Our Methodology */}
+        <Methodology />
+
+        {/* 7. Classes & Fee Structure */}
         <Classes />
-        <Approach />
+
+        {/* 8. Faculty */}
+        <Faculty />
+
+        {/* 9. FAQ */}
+        <FAQ />
+
+        {/* 10. Testimonials */}
         <Testimonials />
-        <CTA />
+
+        {/* 11. Contact Us */}
+        <Contact />
       </main>
       <Footer />
     </div>
