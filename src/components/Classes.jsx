@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Check, ArrowRight } from 'lucide-react';
-import { COLORS } from '../constants/theme';
+import { COLORS, SHADOWS } from '../constants/theme';
 
 const Classes = () => {
     const [activeTab, setActiveTab] = useState('primary');
@@ -8,6 +8,7 @@ const Classes = () => {
     const classCategories = {
         primary: {
             label: 'Primary',
+            emoji: '📒',
             subtitle: 'Jr. KG - 5th Std',
             classes: [
                 { name: 'Jr. KG', subjects: 'All Subjects', fee: '₹1,500' },
@@ -19,6 +20,7 @@ const Classes = () => {
         },
         middle: {
             label: 'Middle',
+            emoji: '📗',
             subtitle: '6th - 8th Std',
             classes: [
                 { name: '6th Std', subjects: 'Maths, Science, English', fee: '₹2,500' },
@@ -28,6 +30,7 @@ const Classes = () => {
         },
         secondary: {
             label: 'Secondary',
+            emoji: '📘',
             subtitle: '9th - 10th Std',
             classes: [
                 { name: '9th Std', subjects: 'Maths, Science', fee: '₹3,500' },
@@ -45,8 +48,8 @@ const Classes = () => {
 
     return (
         <section id="classes" style={{
-            padding: '120px 24px',
-            backgroundColor: '#f0f2f5',
+            padding: '140px 24px',
+            backgroundColor: COLORS.warmBg,
         }}>
             <div style={{
                 maxWidth: '1000px',
@@ -55,73 +58,78 @@ const Classes = () => {
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                        fontWeight: 400,
-                        color: '#1b1b1b',
-                        lineHeight: 1.15,
+                        fontSize: 'clamp(2.8rem, 5vw, 4rem)',
+                        fontWeight: 600,
+                        color: COLORS.dark,
+                        lineHeight: 1.1,
                         marginBottom: '20px',
-                        letterSpacing: '-0.02em',
+                        letterSpacing: '-0.03em',
                     }}>
-                        Classes & Fee Structure
+                        Classes & Fee{' '}
+                        <span style={{ color: COLORS.primary }}>Structure</span>
                     </h2>
                     <p style={{
                         fontSize: '1.25rem',
-                        color: '#54656f',
+                        color: COLORS.darkSecondary,
+                        lineHeight: 1.7,
                     }}>
                         Affordable fees with quality education
                     </p>
                 </div>
 
-                {/* Tabs */}
+                {/* Tabs - Neo-brutalist */}
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    gap: '8px',
-                    marginBottom: '48px',
-                    background: 'white',
-                    padding: '8px',
-                    borderRadius: '100px',
-                    width: 'fit-content',
-                    margin: '0 auto 48px',
+                    gap: '16px',
+                    marginBottom: '64px',
+                    flexWrap: 'wrap',
                 }}>
                     {Object.entries(classCategories).map(([key, category]) => (
                         <button
                             key={key}
                             onClick={() => setActiveTab(key)}
                             style={{
-                                padding: '12px 32px',
+                                padding: '16px 32px',
                                 borderRadius: '100px',
-                                border: 'none',
-                                background: activeTab === key ? COLORS.primary : 'transparent',
-                                color: activeTab === key ? 'white' : '#54656f',
-                                fontWeight: 500,
+                                border: `2px solid ${COLORS.dark}`,
+                                background: activeTab === key ? COLORS.primaryLight : COLORS.white,
+                                color: COLORS.dark,
+                                fontWeight: 600,
                                 fontSize: '1rem',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
+                                boxShadow: activeTab === key ? SHADOWS.brutalist : 'none',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
                             }}
                         >
+                            <span>{category.emoji}</span>
                             {category.label}
                         </button>
                     ))}
                 </div>
 
-                {/* Fee Table */}
+                {/* Fee Table - Neo-brutalist */}
                 <div style={{
-                    background: 'white',
+                    background: COLORS.white,
                     borderRadius: '24px',
                     overflow: 'hidden',
+                    border: `2px solid ${COLORS.dark}`,
+                    boxShadow: SHADOWS.brutalist,
                 }}>
                     {/* Table Header */}
                     <div style={{
                         display: 'grid',
                         gridTemplateColumns: '1fr 1.5fr 120px',
                         padding: '20px 32px',
-                        background: '#f8f9fa',
-                        borderBottom: '1px solid #e9edef',
+                        background: COLORS.primaryLight,
+                        borderBottom: `2px solid ${COLORS.dark}`,
                     }}>
-                        <span style={{ fontWeight: 600, color: '#54656f', fontSize: '0.9rem' }}>CLASS</span>
-                        <span style={{ fontWeight: 600, color: '#54656f', fontSize: '0.9rem' }}>SUBJECTS</span>
-                        <span style={{ fontWeight: 600, color: '#54656f', fontSize: '0.9rem', textAlign: 'right' }}>FEE/MONTH</span>
+                        <span style={{ fontWeight: 700, color: COLORS.dark, fontSize: '0.9rem', letterSpacing: '0.05em' }}>CLASS</span>
+                        <span style={{ fontWeight: 700, color: COLORS.dark, fontSize: '0.9rem', letterSpacing: '0.05em' }}>SUBJECTS</span>
+                        <span style={{ fontWeight: 700, color: COLORS.dark, fontSize: '0.9rem', textAlign: 'right', letterSpacing: '0.05em' }}>FEE/MONTH</span>
                     </div>
 
                     {/* Table Body */}
@@ -132,17 +140,30 @@ const Classes = () => {
                                 display: 'grid',
                                 gridTemplateColumns: '1fr 1.5fr 120px',
                                 padding: '24px 32px',
-                                borderBottom: index < classCategories[activeTab].classes.length - 1 ? '1px solid #e9edef' : 'none',
+                                borderBottom: index < classCategories[activeTab].classes.length - 1 ? `1px solid ${COLORS.border}` : 'none',
                                 alignItems: 'center',
+                                transition: 'background 0.2s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.background = COLORS.warmBg;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.background = COLORS.white;
                             }}
                         >
-                            <span style={{ fontWeight: 600, color: '#1b1b1b', fontSize: '1.05rem' }}>
+                            <span style={{ fontWeight: 600, color: COLORS.dark, fontSize: '1.1rem' }}>
                                 {classItem.name}
                             </span>
-                            <span style={{ color: '#54656f' }}>
+                            <span style={{ color: COLORS.darkSecondary, fontSize: '1rem' }}>
                                 {classItem.subjects}
                             </span>
-                            <span style={{ fontWeight: 700, color: COLORS.primary, fontSize: '1.1rem', textAlign: 'right' }}>
+                            <span style={{
+                                fontWeight: 700,
+                                color: COLORS.primary,
+                                fontSize: '1.2rem',
+                                textAlign: 'right',
+                                fontFamily: 'system-ui, sans-serif',
+                            }}>
                                 {classItem.fee}
                             </span>
                         </div>
@@ -151,7 +172,8 @@ const Classes = () => {
                     {/* Footer - What's Included */}
                     <div style={{
                         padding: '24px 32px',
-                        background: '#f8f9fa',
+                        background: COLORS.light,
+                        borderTop: `2px solid ${COLORS.dark}`,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -162,10 +184,21 @@ const Classes = () => {
                             <div key={index} style={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '8px',
+                                gap: '10px',
                             }}>
-                                <Check size={16} color={COLORS.primary} />
-                                <span style={{ color: '#54656f', fontSize: '0.9rem' }}>{item}</span>
+                                <div style={{
+                                    width: '24px',
+                                    height: '24px',
+                                    borderRadius: '50%',
+                                    background: COLORS.primaryLight,
+                                    border: `2px solid ${COLORS.dark}`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}>
+                                    <Check size={14} color={COLORS.primary} strokeWidth={3} />
+                                </div>
+                                <span style={{ color: COLORS.dark, fontSize: '0.95rem', fontWeight: 500 }}>{item}</span>
                             </div>
                         ))}
                     </div>
@@ -179,21 +212,42 @@ const Classes = () => {
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '8px',
-                            padding: '16px 32px',
-                            background: '#1b1b1b',
-                            color: 'white',
+                            padding: '16px 36px',
+                            background: COLORS.primaryLight,
+                            color: COLORS.dark,
                             borderRadius: '100px',
                             fontWeight: 600,
+                            fontSize: '1rem',
                             textDecoration: 'none',
-                            transition: 'transform 0.2s ease',
+                            border: `2px solid ${COLORS.dark}`,
+                            transition: 'all 0.3s ease',
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.background = COLORS.dark;
+                            e.currentTarget.style.color = COLORS.white;
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.background = COLORS.primaryLight;
+                            e.currentTarget.style.color = COLORS.dark;
+                        }}
                     >
                         Enroll Now <ArrowRight size={18} />
                     </a>
                 </div>
             </div>
+
+            <style>{`
+                @media (max-width: 700px) {
+                    #classes > div > div:nth-child(3) > div {
+                        grid-template-columns: 1fr !important;
+                        gap: 8px !important;
+                        text-align: left !important;
+                    }
+                    #classes > div > div:nth-child(3) > div span:last-child {
+                        text-align: left !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };
