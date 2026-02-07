@@ -1,15 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { COLORS } from '../constants/theme';
+import { COLORS, SHADOWS } from '../constants/theme';
 
 const Achievements = () => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
 
     const stats = [
-        { value: 500, suffix: '+', label: 'Happy Students' },
-        { value: 10, suffix: '+', label: 'Years Experience' },
-        { value: 95, suffix: '%', label: 'Success Rate' },
-        { value: 50, suffix: '+', label: 'Top Rankers' },
+        { value: 500, suffix: '+', label: 'Happy Students', emoji: '🎓' },
+        { value: 10, suffix: '+', label: 'Years Experience', emoji: '📚' },
+        { value: 95, suffix: '%', label: 'Success Rate', emoji: '🏆' },
+        { value: 50, suffix: '+', label: 'Top Rankers', emoji: '⭐' },
     ];
 
     const toppers = [
@@ -59,8 +59,8 @@ const Achievements = () => {
 
     return (
         <section ref={sectionRef} id="achievements" style={{
-            padding: '120px 24px',
-            backgroundColor: '#f0f2f5',
+            padding: '140px 24px',
+            backgroundColor: COLORS.white,
         }}>
             <div style={{
                 maxWidth: '1200px',
@@ -69,26 +69,28 @@ const Achievements = () => {
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                        fontWeight: 400,
-                        color: '#1b1b1b',
-                        lineHeight: 1.15,
+                        fontSize: 'clamp(2.8rem, 5vw, 4rem)',
+                        fontWeight: 600,
+                        color: COLORS.dark,
+                        lineHeight: 1.1,
                         marginBottom: '20px',
-                        letterSpacing: '-0.02em',
+                        letterSpacing: '-0.03em',
                     }}>
-                        Numbers that speak excellence
+                        Numbers that speak{' '}
+                        <span style={{ color: COLORS.primary }}>excellence</span>
                     </h2>
                     <p style={{
                         fontSize: '1.25rem',
-                        color: '#54656f',
+                        color: COLORS.darkSecondary,
                         maxWidth: '600px',
                         margin: '0 auto',
+                        lineHeight: 1.7,
                     }}>
                         Our track record reflects our commitment to quality education
                     </p>
                 </div>
 
-                {/* Stats Grid */}
+                {/* Stats Grid - Neo-brutalist cards */}
                 <div style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(4, 1fr)',
@@ -99,23 +101,33 @@ const Achievements = () => {
                         <div
                             key={index}
                             style={{
+                                background: COLORS.warmBg,
+                                borderRadius: '24px',
+                                padding: '32px 20px',
                                 textAlign: 'center',
-                                padding: '40px 20px',
+                                border: `2px solid ${COLORS.dark}`,
+                                boxShadow: SHADOWS.brutalist,
                             }}
                         >
                             <div style={{
-                                fontSize: 'clamp(3rem, 6vw, 4.5rem)',
-                                fontWeight: 300,
+                                fontSize: '2rem',
+                                marginBottom: '12px',
+                            }}>
+                                {stat.emoji}
+                            </div>
+                            <div style={{
+                                fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                                fontWeight: 700,
                                 color: COLORS.primary,
                                 fontFamily: 'system-ui, sans-serif',
                                 lineHeight: 1,
-                                marginBottom: '12px',
+                                marginBottom: '8px',
                             }}>
                                 <AnimatedNumber value={stat.value} suffix={stat.suffix} />
                             </div>
                             <div style={{
                                 fontSize: '1rem',
-                                color: '#54656f',
+                                color: COLORS.darkSecondary,
                                 fontWeight: 500,
                             }}>
                                 {stat.label}
@@ -128,12 +140,12 @@ const Achievements = () => {
                 <div>
                     <h3 style={{
                         fontSize: '1.75rem',
-                        fontWeight: 500,
-                        color: '#1b1b1b',
+                        fontWeight: 600,
+                        color: COLORS.dark,
                         textAlign: 'center',
                         marginBottom: '48px',
                     }}>
-                        Our Star Performers
+                        Our Star <span style={{ color: COLORS.primary }}>Performers</span>
                     </h3>
                     <div style={{
                         display: 'grid',
@@ -144,14 +156,12 @@ const Achievements = () => {
                             <div
                                 key={index}
                                 style={{
-                                    background: 'white',
-                                    borderRadius: '16px',
+                                    background: COLORS.primaryLight,
+                                    borderRadius: '100px 100px 24px 24px',
                                     padding: '32px',
                                     textAlign: 'center',
-                                    transition: 'transform 0.3s ease',
+                                    border: `2px solid ${COLORS.dark}`,
                                 }}
-                                onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
-                                onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                             >
                                 <div style={{
                                     width: '80px',
@@ -174,14 +184,14 @@ const Achievements = () => {
                                 <h4 style={{
                                     fontSize: '1.1rem',
                                     fontWeight: 600,
-                                    color: '#1b1b1b',
+                                    color: COLORS.dark,
                                     marginBottom: '4px',
                                 }}>
                                     {topper.name}
                                 </h4>
                                 <div style={{
                                     fontSize: '1.5rem',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
                                     color: COLORS.primary,
                                     marginBottom: '4px',
                                 }}>
@@ -189,7 +199,7 @@ const Achievements = () => {
                                 </div>
                                 <span style={{
                                     fontSize: '0.9rem',
-                                    color: '#54656f',
+                                    color: COLORS.darkSecondary,
                                 }}>
                                     {topper.class}
                                 </span>
@@ -200,9 +210,14 @@ const Achievements = () => {
             </div>
 
             <style>{`
-                @media (max-width: 768px) {
+                @media (max-width: 900px) {
                     #achievements > div > div:nth-child(2) {
                         grid-template-columns: repeat(2, 1fr) !important;
+                    }
+                }
+                @media (max-width: 500px) {
+                    #achievements > div > div:nth-child(2) {
+                        grid-template-columns: 1fr !important;
                     }
                 }
             `}</style>
