@@ -14,10 +14,18 @@ export const COLORS = {
     darkSecondary: '#54656f',  // Secondary text
     light: '#f0f2f5',          // Light background
     white: '#ffffff',
+    warmBg: '#FFF8F5',         // Warm cream background
 
     // Border & misc
     border: '#e9edef',
     borderLight: '#f0f0f0',
+};
+
+export const SHADOWS = {
+    card: '0 4px 24px rgba(0, 0, 0, 0.08)',
+    cardHover: '0 8px 32px rgba(0, 0, 0, 0.12)',
+    soft: '0 2px 12px rgba(0, 0, 0, 0.06)',
+    brutalist: '6px 6px 0px #1b1b1b',
 };
 
 export const TYPOGRAPHY = {

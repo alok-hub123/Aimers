@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Search } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { COLORS } from '../constants/theme';
 
 // Register plugins
 gsap.registerPlugin(useGSAP);
@@ -22,10 +23,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Track scroll position for navbar styling
       setIsScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
       const sections = ['hero', 'about', 'achievements', 'why-choose', 'facilities', 'methodology', 'classes', 'faculty', 'faq', 'testimonials', 'contact'];
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -60,13 +59,11 @@ const Navbar = () => {
       <nav ref={navRef} style={{
         maxWidth: isScrolled ? '1160px' : '100%',
         margin: '0 auto',
-        padding: isScrolled ? '12px 24px' : '0',
-        background: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'white',
-        backdropFilter: isScrolled ? 'blur(20px)' : 'none',
-        WebkitBackdropFilter: isScrolled ? 'blur(20px)' : 'none',
+        padding: isScrolled ? '10px 20px' : '0',
+        background: isScrolled ? COLORS.white : COLORS.white,
         borderRadius: isScrolled ? '100px' : '0',
-        boxShadow: isScrolled ? '0 4px 30px rgba(0, 0, 0, 0.1)' : 'none',
-        border: isScrolled ? '1px solid rgba(255, 255, 255, 0.8)' : 'none',
+        boxShadow: isScrolled ? '0 2px 20px rgba(0, 0, 0, 0.08)' : 'none',
+        border: isScrolled ? `2px solid ${COLORS.dark}` : 'none',
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       }}>
         <div style={{
@@ -82,6 +79,7 @@ const Navbar = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
+            textDecoration: 'none',
           }}>
             <div style={{
               width: '40px',
@@ -98,9 +96,8 @@ const Navbar = () => {
             <span style={{
               fontSize: '1.3rem',
               fontWeight: 700,
-              color: 'var(--color-primary)',
+              color: COLORS.primary,
               letterSpacing: '-0.02em',
-              fontFamily: 'Poppins, sans-serif',
             }}>
               Aimers
             </span>
@@ -110,7 +107,7 @@ const Navbar = () => {
           <div className="desktop-nav" style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
+            gap: '4px',
           }}>
             {navLinks.map((link) => (
               <a
@@ -120,20 +117,21 @@ const Navbar = () => {
                   fontSize: '0.95rem',
                   fontWeight: 500,
                   padding: '10px 18px',
-                  borderRadius: '8px',
-                  color: activeSection === link.id ? 'var(--color-primary)' : 'var(--color-text-muted)',
-                  background: activeSection === link.id ? 'rgba(30, 27, 75, 0.06)' : 'transparent',
+                  borderRadius: '100px',
+                  color: activeSection === link.id ? COLORS.dark : COLORS.darkSecondary,
+                  background: activeSection === link.id ? COLORS.primaryLight : 'transparent',
                   transition: 'all 0.2s ease',
+                  textDecoration: 'none',
                 }}
                 onMouseEnter={(e) => {
                   if (activeSection !== link.id) {
-                    e.target.style.color = 'var(--color-primary)';
-                    e.target.style.background = 'rgba(30, 27, 75, 0.04)';
+                    e.target.style.color = COLORS.dark;
+                    e.target.style.background = COLORS.light;
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (activeSection !== link.id) {
-                    e.target.style.color = 'var(--color-text-muted)';
+                    e.target.style.color = COLORS.darkSecondary;
                     e.target.style.background = 'transparent';
                   }
                 }}
@@ -147,8 +145,8 @@ const Navbar = () => {
           <button
             className="desktop-nav"
             style={{
-              background: 'var(--color-primary)',
-              color: 'white',
+              background: COLORS.primaryLight,
+              color: COLORS.dark,
               padding: '12px 28px',
               borderRadius: '100px',
               fontWeight: 600,
@@ -156,17 +154,17 @@ const Navbar = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              border: 'none',
+              border: `2px solid ${COLORS.dark}`,
               cursor: 'pointer',
               transition: 'all 0.3s ease',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(30, 27, 75, 0.25)';
+              e.currentTarget.style.background = COLORS.dark;
+              e.currentTarget.style.color = COLORS.white;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.background = COLORS.primaryLight;
+              e.currentTarget.style.color = COLORS.dark;
             }}
           >
             Enroll Now
@@ -178,9 +176,9 @@ const Navbar = () => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{
               padding: '10px',
-              color: 'var(--color-primary)',
-              background: mobileMenuOpen ? 'rgba(30, 27, 75, 0.1)' : 'transparent',
-              borderRadius: '10px',
+              color: COLORS.dark,
+              background: mobileMenuOpen ? COLORS.light : 'transparent',
+              borderRadius: '12px',
               border: 'none',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
@@ -210,25 +208,26 @@ const Navbar = () => {
                 style={{
                   fontSize: '1rem',
                   fontWeight: 600,
-                  color: activeSection === link.id ? 'var(--color-primary)' : 'var(--color-text-main)',
+                  color: activeSection === link.id ? COLORS.primary : COLORS.dark,
                   padding: '14px 20px',
-                  borderRadius: '10px',
-                  background: activeSection === link.id ? 'rgba(30, 27, 75, 0.08)' : 'transparent',
+                  borderRadius: '12px',
+                  background: activeSection === link.id ? COLORS.primaryLight : 'transparent',
                   transition: 'all 0.2s ease',
+                  textDecoration: 'none',
                 }}
               >
                 {link.name}
               </a>
             ))}
             <button style={{
-              background: 'var(--color-primary)',
-              color: 'white',
+              background: COLORS.primaryLight,
+              color: COLORS.dark,
               padding: '14px',
-              borderRadius: '10px',
+              borderRadius: '100px',
               fontWeight: 600,
               marginTop: '8px',
               width: '100%',
-              border: 'none',
+              border: `2px solid ${COLORS.dark}`,
               cursor: 'pointer',
             }}>
               Enroll Now
