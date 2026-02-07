@@ -1,10 +1,11 @@
 import React from 'react';
+import { COLORS, SHADOWS } from '../constants/theme';
 
 const AboutUs = () => {
     return (
         <section id="about" style={{
-            padding: '120px 24px',
-            backgroundColor: 'white',
+            padding: '140px 24px',
+            backgroundColor: COLORS.warmBg,
         }}>
             <div style={{
                 maxWidth: '1200px',
@@ -20,19 +21,20 @@ const AboutUs = () => {
                     {/* Text Content */}
                     <div>
                         <h2 style={{
-                            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                            fontWeight: 400,
-                            color: '#1b1b1b',
-                            lineHeight: 1.15,
-                            marginBottom: '24px',
-                            letterSpacing: '-0.02em',
+                            fontSize: 'clamp(2.8rem, 5vw, 4rem)',
+                            fontWeight: 600,
+                            color: COLORS.dark,
+                            lineHeight: 1.1,
+                            marginBottom: '28px',
+                            letterSpacing: '-0.03em',
                         }}>
-                            Nurturing young minds since 2014
+                            Nurturing young minds{' '}
+                            <span style={{ color: COLORS.primary }}>since 2014</span>
                         </h2>
                         <p style={{
                             fontSize: '1.25rem',
-                            color: '#54656f',
-                            lineHeight: 1.7,
+                            color: COLORS.darkSecondary,
+                            lineHeight: 1.8,
                             marginBottom: '24px',
                         }}>
                             At Aimers Academy, we believe every child has unique potential waiting to be unlocked.
@@ -41,18 +43,22 @@ const AboutUs = () => {
                         </p>
                         <p style={{
                             fontSize: '1.25rem',
-                            color: '#54656f',
-                            lineHeight: 1.7,
+                            color: COLORS.darkSecondary,
+                            lineHeight: 1.8,
                         }}>
                             With over a decade of experience, we have helped hundreds of students achieve
                             their academic goals and build confidence in their abilities.
                         </p>
                     </div>
 
-                    {/* Image */}
+                    {/* Image Card - Neo-brutalist */}
                     <div style={{
-                        borderRadius: '32px',
+                        borderRadius: '24px',
                         overflow: 'hidden',
+                        border: `2px solid ${COLORS.dark}`,
+                        boxShadow: SHADOWS.brutalist,
+                        background: COLORS.white,
+                        padding: '12px',
                     }}>
                         <img
                             src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800"
@@ -61,48 +67,88 @@ const AboutUs = () => {
                                 width: '100%',
                                 height: '480px',
                                 objectFit: 'cover',
+                                borderRadius: '24px',
                             }}
                         />
                     </div>
                 </div>
 
-                {/* Mission & Vision - Simple Text */}
+                {/* Mission & Vision - Cards */}
                 <div style={{
                     marginTop: '120px',
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: '60px',
+                    gap: '32px',
                 }}>
-                    <div>
+                    {/* Mission Card */}
+                    <div style={{
+                        background: COLORS.white,
+                        borderRadius: '24px',
+                        padding: '40px',
+                        border: `2px solid ${COLORS.dark}`,
+                        boxShadow: SHADOWS.brutalist,
+                    }}>
+                        <div style={{
+                            width: '56px',
+                            height: '56px',
+                            borderRadius: '16px',
+                            background: COLORS.primaryLight,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginBottom: '24px',
+                        }}>
+                            <span style={{ fontSize: '1.8rem' }}>🎯</span>
+                        </div>
                         <h3 style={{
                             fontSize: '1.5rem',
                             fontWeight: 600,
-                            color: '#1b1b1b',
+                            color: COLORS.dark,
                             marginBottom: '16px',
                         }}>
-                            Our Mission
+                            Our <span style={{ color: COLORS.primary }}>Mission</span>
                         </h3>
                         <p style={{
                             fontSize: '1.1rem',
-                            color: '#54656f',
+                            color: COLORS.darkSecondary,
                             lineHeight: 1.7,
                         }}>
                             To provide quality education that empowers students with knowledge,
                             critical thinking skills, and the confidence to achieve their dreams.
                         </p>
                     </div>
-                    <div>
+
+                    {/* Vision Card */}
+                    <div style={{
+                        background: COLORS.white,
+                        borderRadius: '24px',
+                        padding: '40px',
+                        border: `2px solid ${COLORS.dark}`,
+                        boxShadow: SHADOWS.brutalist,
+                    }}>
+                        <div style={{
+                            width: '56px',
+                            height: '56px',
+                            borderRadius: '16px',
+                            background: COLORS.primaryLight,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginBottom: '24px',
+                        }}>
+                            <span style={{ fontSize: '1.8rem' }}>🚀</span>
+                        </div>
                         <h3 style={{
                             fontSize: '1.5rem',
                             fontWeight: 600,
-                            color: '#1b1b1b',
+                            color: COLORS.dark,
                             marginBottom: '16px',
                         }}>
-                            Our Vision
+                            Our <span style={{ color: COLORS.primary }}>Vision</span>
                         </h3>
                         <p style={{
                             fontSize: '1.1rem',
-                            color: '#54656f',
+                            color: COLORS.darkSecondary,
                             lineHeight: 1.7,
                         }}>
                             To be the leading tuition academy that transforms every student into
