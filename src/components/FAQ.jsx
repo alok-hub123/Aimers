@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
-import { COLORS } from '../constants/theme';
+import { Plus, Minus } from 'lucide-react';
+import { COLORS, SHADOWS } from '../constants/theme';
 
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState(0);
@@ -34,43 +34,49 @@ const FAQ = () => {
 
     return (
         <section id="faq" style={{
-            padding: '120px 24px',
-            backgroundColor: '#f0f2f5',
+            padding: '140px 24px',
+            backgroundColor: COLORS.white,
         }}>
             <div style={{
                 maxWidth: '800px',
                 margin: '0 auto',
             }}>
                 {/* Header */}
-                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                        fontWeight: 400,
-                        color: '#1b1b1b',
-                        lineHeight: 1.15,
+                        fontSize: 'clamp(2.8rem, 5vw, 4rem)',
+                        fontWeight: 600,
+                        color: COLORS.dark,
+                        lineHeight: 1.1,
                         marginBottom: '20px',
-                        letterSpacing: '-0.02em',
+                        letterSpacing: '-0.03em',
                     }}>
-                        Frequently asked questions
+                        Got{' '}
+                        <span style={{ color: COLORS.primary }}>questions</span>?
                     </h2>
                     <p style={{
                         fontSize: '1.25rem',
-                        color: '#54656f',
+                        color: COLORS.darkSecondary,
+                        maxWidth: '500px',
+                        margin: '0 auto',
+                        lineHeight: 1.7,
                     }}>
-                        Find answers to common questions
+                        Find answers to common questions about our academy
                     </p>
                 </div>
 
                 {/* FAQ Accordion */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
                             style={{
-                                background: 'white',
+                                background: openIndex === index ? COLORS.primaryLight : COLORS.white,
                                 borderRadius: '16px',
                                 overflow: 'hidden',
                                 transition: 'all 0.3s ease',
+                                border: `2px solid ${COLORS.dark}`,
+                                boxShadow: openIndex === index ? SHADOWS.brutalist : 'none',
                             }}
                         >
                             <button
@@ -89,21 +95,38 @@ const FAQ = () => {
                                 }}
                             >
                                 <span style={{
-                                    fontSize: '1.1rem',
-                                    fontWeight: 500,
-                                    color: '#1b1b1b',
+                                    fontSize: '1.15rem',
+                                    fontWeight: 600,
+                                    color: COLORS.dark,
                                 }}>
                                     {faq.question}
                                 </span>
-                                <ChevronDown
-                                    size={22}
-                                    color="#54656f"
-                                    style={{
-                                        transform: openIndex === index ? 'rotate(180deg)' : 'rotate(0)',
-                                        transition: 'transform 0.3s ease',
-                                        flexShrink: 0,
-                                    }}
-                                />
+                                <div style={{
+                                    width: '36px',
+                                    height: '36px',
+                                    borderRadius: '50%',
+                                    background: openIndex === index ? COLORS.primary : COLORS.light,
+                                    border: `2px solid ${COLORS.dark}`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexShrink: 0,
+                                    transition: 'all 0.3s ease',
+                                }}>
+                                    {openIndex === index ? (
+                                        <Minus
+                                            size={18}
+                                            color={COLORS.white}
+                                            strokeWidth={3}
+                                        />
+                                    ) : (
+                                        <Plus
+                                            size={18}
+                                            color={COLORS.dark}
+                                            strokeWidth={3}
+                                        />
+                                    )}
+                                </div>
                             </button>
                             <div style={{
                                 maxHeight: openIndex === index ? '200px' : '0',
@@ -112,7 +135,7 @@ const FAQ = () => {
                             }}>
                                 <p style={{
                                     padding: '0 28px 24px',
-                                    color: '#54656f',
+                                    color: COLORS.darkSecondary,
                                     lineHeight: 1.7,
                                     fontSize: '1.05rem',
                                 }}>
@@ -126,24 +149,54 @@ const FAQ = () => {
                 {/* Contact CTA */}
                 <div style={{
                     textAlign: 'center',
-                    marginTop: '48px',
+                    marginTop: '60px',
                 }}>
-                    <p style={{ color: '#54656f', marginBottom: '16px' }}>
+                    <p style={{
+                        color: COLORS.dark,
+                        marginBottom: '20px',
+                        fontSize: '1.15rem',
+                        fontWeight: 500,
+                    }}>
                         Still have questions?
                     </p>
                     <a
                         href="#contact"
                         style={{
-                            color: COLORS.primary,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            padding: '14px 32px',
+                            background: COLORS.primaryLight,
+                            color: COLORS.dark,
+                            borderRadius: '100px',
                             fontWeight: 600,
+                            fontSize: '1rem',
                             textDecoration: 'none',
-                            fontSize: '1.1rem',
+                            border: `2px solid ${COLORS.dark}`,
+                            transition: 'all 0.3s ease',
                         }}
                     >
                         Contact us →
                     </a>
                 </div>
             </div>
+
+            <style>{`
+                @media (max-width: 600px) {
+                    #faq {
+                        padding: 80px 16px !important;
+                    }
+                    #faq > div > div:nth-child(2) > div button {
+                        padding: 20px !important;
+                    }
+                    #faq > div > div:nth-child(2) > div button span {
+                        font-size: 1rem !important;
+                    }
+                    #faq > div > div:nth-child(3) {
+                        padding: 32px 24px !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };
