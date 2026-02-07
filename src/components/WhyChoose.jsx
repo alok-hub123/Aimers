@@ -38,85 +38,133 @@ const WhyChoose = () => {
 
     return (
         <section id="why-choose" style={{
-            padding: '120px 24px',
-            backgroundColor: 'white',
+            padding: '140px 24px',
+            backgroundColor: COLORS.white,
         }}>
             <div style={{
                 maxWidth: '1200px',
                 margin: '0 auto',
             }}>
-                {/* Content Layout */}
+                {/* Content Layout - Alternating Style */}
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: '1fr 1.2fr',
+                    gridTemplateColumns: '1fr 1.3fr',
                     gap: '80px',
                     alignItems: 'start',
                 }}>
-                    {/* Left - Title */}
-                    <div style={{ position: 'sticky', top: '120px' }}>
+                    {/* Left - Sticky Title */}
+                    <div style={{ position: 'sticky', top: '140px', paddingTop: '28px' }}>
                         <h2 style={{
-                            fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                            fontWeight: 400,
-                            color: '#1b1b1b',
-                            lineHeight: 1.15,
+                            fontSize: 'clamp(2.8rem, 5vw, 4rem)',
+                            fontWeight: 600,
+                            color: COLORS.dark,
+                            lineHeight: 1.1,
                             marginBottom: '24px',
-                            letterSpacing: '-0.02em',
+                            letterSpacing: '-0.03em',
                         }}>
-                            What makes us different
+                            What makes us{' '}
+                            <span style={{ color: COLORS.primary }}>different</span>
                         </h2>
                         <p style={{
                             fontSize: '1.25rem',
-                            color: '#54656f',
+                            color: COLORS.darkSecondary,
                             lineHeight: 1.7,
+                            marginBottom: '32px',
                         }}>
                             Discover why parents trust Aimers Academy for their children's education
                         </p>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '12px',
+                        }}>
+                            <div style={{
+                                width: '48px',
+                                height: '4px',
+                                background: COLORS.primary,
+                                borderRadius: '2px',
+                            }} />
+                            <span style={{
+                                fontSize: '0.95rem',
+                                color: COLORS.darkSecondary,
+                                fontWeight: 500,
+                            }}>
+                                10+ years of excellence
+                            </span>
+                        </div>
                     </div>
 
-                    {/* Right - Features List */}
+                    {/* Right - Clean Feature List */}
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '40px',
+                        gap: '20px',
                     }}>
                         {features.map((feature, index) => (
                             <div
                                 key={index}
                                 style={{
                                     display: 'flex',
-                                    gap: '24px',
-                                    paddingBottom: '40px',
-                                    borderBottom: index < features.length - 1 ? '1px solid #e9edef' : 'none',
+                                    gap: '28px',
+                                    padding: '28px 32px',
+                                    background: COLORS.white,
+                                    border: `2px solid ${COLORS.dark}`,
+                                    borderRadius: '20px',
+                                    transition: 'all 0.3s ease',
+                                    cursor: 'default',
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = COLORS.warmBg;
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = COLORS.white;
                                 }}
                             >
+                                {/* Icon */}
                                 <div style={{
-                                    width: '48px',
-                                    height: '48px',
-                                    borderRadius: '12px',
+                                    width: '56px',
+                                    height: '56px',
+                                    borderRadius: '14px',
                                     background: COLORS.primaryLight,
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     flexShrink: 0,
+                                    border: `2px solid ${COLORS.dark}`,
                                 }}>
-                                    <feature.icon size={24} color={COLORS.primary} />
+                                    <feature.icon size={24} color={COLORS.primary} strokeWidth={1.8} />
                                 </div>
-                                <div>
+
+                                {/* Content */}
+                                <div style={{ flex: 1 }}>
                                     <h3 style={{
-                                        fontSize: '1.25rem',
+                                        fontSize: '1.3rem',
                                         fontWeight: 600,
-                                        color: '#1b1b1b',
+                                        color: COLORS.dark,
                                         marginBottom: '8px',
+                                        letterSpacing: '-0.01em',
                                     }}>
                                         {feature.title}
                                     </h3>
                                     <p style={{
                                         fontSize: '1.05rem',
-                                        color: '#54656f',
-                                        lineHeight: 1.6,
+                                        color: COLORS.darkSecondary,
+                                        lineHeight: 1.65,
                                     }}>
                                         {feature.description}
                                     </p>
+                                </div>
+
+                                {/* Number indicator */}
+                                <div style={{
+                                    fontSize: '1.75rem',
+                                    fontWeight: 700,
+                                    color: COLORS.primary,
+                                    alignSelf: 'center',
+                                    fontFamily: 'system-ui, sans-serif',
+                                    opacity: 0.7,
+                                }}>
+                                    0{index + 1}
                                 </div>
                             </div>
                         ))}
@@ -132,6 +180,10 @@ const WhyChoose = () => {
                     }
                     #why-choose > div > div > div:first-child {
                         position: static !important;
+                        text-align: center;
+                    }
+                    #why-choose > div > div > div:first-child > div:last-child {
+                        justify-content: center;
                     }
                 }
             `}</style>
