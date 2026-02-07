@@ -1,40 +1,45 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { COLORS } from '../constants/theme';
+import { COLORS, SHADOWS } from '../constants/theme';
 
 const Methodology = () => {
     const steps = [
         {
             number: '01',
+            emoji: '📋',
             title: 'Assessment',
-            description: 'We begin with understanding each student\'s current level and learning style through diagnostic tests.',
+            description: 'Understanding each student\'s current level and learning style.',
         },
         {
             number: '02',
+            emoji: '📝',
             title: 'Personalized Plan',
-            description: 'Custom study plans are created based on individual strengths, weaknesses, and goals.',
+            description: 'Custom study plans based on individual strengths and goals.',
         },
         {
             number: '03',
+            emoji: '💡',
             title: 'Concept Teaching',
-            description: 'Focus on building strong conceptual understanding with real-life examples and applications.',
+            description: 'Building strong conceptual understanding with real examples.',
         },
         {
             number: '04',
+            emoji: '✏️',
             title: 'Practice & Testing',
-            description: 'Regular tests, assignments, and practice sessions to reinforce learning.',
+            description: 'Regular tests and assignments to reinforce learning.',
         },
         {
             number: '05',
-            title: 'Feedback & Improvement',
-            description: 'Continuous feedback and doubt clearing sessions to ensure steady progress.',
+            emoji: '🚀',
+            title: 'Feedback & Growth',
+            description: 'Continuous feedback and doubt clearing for steady progress.',
         },
     ];
 
     return (
         <section id="methodology" style={{
-            padding: '120px 24px',
-            backgroundColor: 'white',
+            padding: '140px 24px',
+            backgroundColor: COLORS.white,
         }}>
             <div style={{
                 maxWidth: '1200px',
@@ -43,94 +48,136 @@ const Methodology = () => {
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h2 style={{
-                        fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                        fontWeight: 400,
-                        color: '#1b1b1b',
-                        lineHeight: 1.15,
+                        fontSize: 'clamp(2.8rem, 5vw, 4rem)',
+                        fontWeight: 600,
+                        color: COLORS.dark,
+                        lineHeight: 1.1,
                         marginBottom: '20px',
-                        letterSpacing: '-0.02em',
+                        letterSpacing: '-0.03em',
                     }}>
-                        How we teach
+                        How we{' '}
+                        <span style={{ color: COLORS.primary }}>teach</span>
                     </h2>
                     <p style={{
                         fontSize: '1.25rem',
-                        color: '#54656f',
-                        maxWidth: '550px',
+                        color: COLORS.darkSecondary,
+                        maxWidth: '600px',
                         margin: '0 auto',
+                        lineHeight: 1.7,
                     }}>
                         Our proven 5-step approach ensures every student achieves their potential
                     </p>
                 </div>
 
-                {/* Steps - Horizontal Timeline */}
+                {/* Steps - Horizontal Flow Path */}
                 <div style={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between',
+                    position: 'relative',
+                    gap: '16px',
                 }}>
+                    {/* Connecting Line */}
+                    <div style={{
+                        position: 'absolute',
+                        top: '44px',
+                        left: '60px',
+                        right: '60px',
+                        height: '12px',
+                        background: COLORS.primaryLight,
+                        borderRadius: '100px',
+                        border: `2px solid ${COLORS.dark}`,
+                        boxShadow: '4px 4px 0px #1b1b1b',
+                        zIndex: 0,
+                        overflow: 'hidden',
+                    }}>
+                        {/* Progress indicator */}
+                        <div style={{
+                            width: '100%',
+                            height: '100%',
+                            background: COLORS.primaryLight,
+                        }} />
+                    </div>
+
                     {steps.map((step, index) => (
                         <div
                             key={index}
                             style={{
-                                display: 'grid',
-                                gridTemplateColumns: '100px 1fr',
-                                gap: '40px',
-                                paddingBottom: '48px',
-                                borderLeft: '2px solid #e9edef',
-                                marginLeft: '24px',
-                                paddingLeft: '40px',
+                                flex: 1,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                textAlign: 'center',
                                 position: 'relative',
+                                zIndex: 1,
                             }}
                         >
-                            {/* Number Circle */}
+                            {/* Step Circle with Number */}
                             <div style={{
-                                position: 'absolute',
-                                left: '-18px',
-                                top: '0',
-                                width: '36px',
-                                height: '36px',
+                                width: '88px',
+                                height: '88px',
                                 borderRadius: '50%',
-                                background: index === 0 ? COLORS.primary : 'white',
-                                border: `2px solid ${index === 0 ? COLORS.primary : '#e9edef'}`,
+                                background: COLORS.white,
+                                border: `3px solid ${COLORS.dark}`,
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                fontSize: '0.85rem',
-                                fontWeight: 600,
-                                color: index === 0 ? 'white' : '#54656f',
+                                marginBottom: '24px',
+                                boxShadow: SHADOWS.brutalist,
+                                position: 'relative',
                             }}>
-                                {step.number}
+                                <span style={{ fontSize: '2rem' }}>{step.emoji}</span>
+                                {/* Step number badge */}
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '-8px',
+                                    right: '-8px',
+                                    width: '32px',
+                                    height: '32px',
+                                    borderRadius: '50%',
+                                    background: index === 0 ? COLORS.primary : COLORS.primaryLight,
+                                    border: `2px solid ${COLORS.dark}`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 700,
+                                    color: index === 0 ? COLORS.white : COLORS.dark,
+                                }}>
+                                    {step.number}
+                                </div>
                             </div>
 
                             {/* Content */}
-                            <div style={{ gridColumn: '1 / -1' }}>
-                                <h3 style={{
-                                    fontSize: '1.5rem',
-                                    fontWeight: 500,
-                                    color: '#1b1b1b',
-                                    marginBottom: '12px',
-                                }}>
-                                    {step.title}
-                                </h3>
-                                <p style={{
-                                    fontSize: '1.1rem',
-                                    color: '#54656f',
-                                    lineHeight: 1.6,
-                                    maxWidth: '600px',
-                                }}>
-                                    {step.description}
-                                </p>
-                            </div>
+                            <h3 style={{
+                                fontSize: '1.2rem',
+                                fontWeight: 600,
+                                color: COLORS.dark,
+                                marginBottom: '10px',
+                                letterSpacing: '-0.01em',
+                            }}>
+                                {step.title}
+                            </h3>
+                            <p style={{
+                                fontSize: '0.95rem',
+                                color: COLORS.darkSecondary,
+                                lineHeight: 1.6,
+                                maxWidth: '180px',
+                            }}>
+                                {step.description}
+                            </p>
                         </div>
                     ))}
                 </div>
 
-                {/* CTA Banner */}
+                {/* CTA Banner - Neo-brutalist style */}
                 <div style={{
-                    marginTop: '60px',
+                    marginTop: '100px',
                     padding: '48px',
-                    background: COLORS.primary,
+                    background: COLORS.primaryLight,
                     borderRadius: '24px',
+                    border: `2px solid ${COLORS.dark}`,
+                    boxShadow: SHADOWS.brutalist,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
@@ -139,16 +186,16 @@ const Methodology = () => {
                 }}>
                     <div>
                         <h3 style={{
-                            fontSize: '1.5rem',
-                            fontWeight: 500,
-                            color: 'white',
+                            fontSize: '1.75rem',
+                            fontWeight: 600,
+                            color: COLORS.dark,
                             marginBottom: '8px',
                         }}>
                             Ready to experience our teaching?
                         </h3>
                         <p style={{
                             fontSize: '1.1rem',
-                            color: 'rgba(255,255,255,0.85)',
+                            color: COLORS.darkSecondary,
                         }}>
                             Book a free demo class and see the difference
                         </p>
@@ -159,21 +206,45 @@ const Methodology = () => {
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '8px',
-                            padding: '14px 28px',
-                            background: 'white',
-                            color: COLORS.primary,
+                            padding: '16px 32px',
+                            background: COLORS.dark,
+                            color: COLORS.white,
                             borderRadius: '100px',
                             fontWeight: 600,
+                            fontSize: '1rem',
                             textDecoration: 'none',
-                            transition: 'transform 0.2s ease',
+                            border: `2px solid ${COLORS.dark}`,
+                            transition: 'all 0.3s ease',
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.background = COLORS.white;
+                            e.currentTarget.style.color = COLORS.dark;
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.background = COLORS.dark;
+                            e.currentTarget.style.color = COLORS.white;
+                        }}
                     >
                         Book Demo <ArrowRight size={18} />
                     </a>
                 </div>
             </div>
+
+            <style>{`
+                @media (max-width: 900px) {
+                    #methodology > div > div:nth-child(2) {
+                        flex-direction: column !important;
+                        align-items: center !important;
+                        gap: 48px !important;
+                    }
+                    #methodology > div > div:nth-child(2) > div:first-child {
+                        display: none !important;
+                    }
+                    #methodology > div > div:nth-child(2) > div:not(:first-child) {
+                        max-width: 300px;
+                    }
+                }
+            `}</style>
         </section>
     );
 };
