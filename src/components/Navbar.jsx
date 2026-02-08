@@ -47,7 +47,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div style={{
+    <div id="navbar-wrapper" style={{
       position: 'fixed',
       top: 0,
       left: 0,
@@ -241,6 +241,23 @@ const Navbar = () => {
         }
         @media (min-width: 901px) {
           .mobile-toggle { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          #navbar-wrapper {
+            padding: 10px 16px !important;
+          }
+          nav {
+            border-radius: 20px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          #navbar-wrapper {
+            padding: 8px 12px !important;
+          }
+          nav {
+            border-radius: 16px !important;
+            padding: 8px 12px !important;
+          }
         }
       `}</style>
       </nav>
