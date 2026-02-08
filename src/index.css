@@ -460,4 +460,19 @@ button {
   .container {
     padding: 0 var(--space-2);
   }
+  
+  /* Reduce section vertical padding on mobile */
+  section {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
 }

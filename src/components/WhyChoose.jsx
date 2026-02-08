@@ -174,16 +174,41 @@ const WhyChoose = () => {
 
             <style>{`
                 @media (max-width: 900px) {
+                    #why-choose {
+                        padding: 80px 16px !important;
+                    }
                     #why-choose > div > div {
                         grid-template-columns: 1fr !important;
-                        gap: 48px !important;
+                        gap: 32px !important;
                     }
                     #why-choose > div > div > div:first-child {
                         position: static !important;
                         text-align: center;
+                        padding-top: 0 !important;
                     }
                     #why-choose > div > div > div:first-child > div:last-child {
                         justify-content: center;
+                    }
+                }
+                @media (max-width: 600px) {
+                    #why-choose {
+                        padding: 60px 16px !important;
+                    }
+                    #why-choose > div > div {
+                        gap: 20px !important;
+                    }
+                    #why-choose > div > div > div:last-child > div {
+                        flex-direction: column !important;
+                        align-items: flex-start !important;
+                        gap: 16px !important;
+                        padding: 20px !important;
+                    }
+                    #why-choose > div > div > div:last-child > div > div:first-child {
+                        width: 48px !important;
+                        height: 48px !important;
+                    }
+                    #why-choose > div > div > div:last-child > div > div:last-child {
+                        display: none !important;
                     }
                 }
             `}</style>

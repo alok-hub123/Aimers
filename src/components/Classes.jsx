@@ -237,14 +237,42 @@ const Classes = () => {
             </div>
 
             <style>{`
+                @media (max-width: 900px) {
+                    #classes {
+                        padding: 80px 16px !important;
+                    }
+                }
                 @media (max-width: 700px) {
+                    #classes {
+                        padding: 60px 16px !important;
+                    }
+                    /* Tab buttons - stack vertically */
+                    #classes > div > div:nth-child(2) {
+                        flex-direction: column !important;
+                        gap: 12px !important;
+                        align-items: stretch !important;
+                    }
+                    #classes > div > div:nth-child(2) button {
+                        width: 100% !important;
+                        justify-content: center !important;
+                        padding: 14px 24px !important;
+                    }
+                    /* Table header and rows */
                     #classes > div > div:nth-child(3) > div {
                         grid-template-columns: 1fr !important;
                         gap: 8px !important;
                         text-align: left !important;
+                        padding: 16px 20px !important;
                     }
                     #classes > div > div:nth-child(3) > div span:last-child {
                         text-align: left !important;
+                        font-size: 1.1rem !important;
+                    }
+                    /* Footer includes - stack vertically */
+                    #classes > div > div:nth-child(3) > div:last-child {
+                        flex-direction: column !important;
+                        align-items: flex-start !important;
+                        gap: 12px !important;
                     }
                 }
             `}</style>
