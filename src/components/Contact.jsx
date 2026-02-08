@@ -11,6 +11,14 @@ const Contact = () => {
         message: '',
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const classOptions = [
+        { value: 'Jr. KG - Sr. KG', label: 'Jr. KG - Sr. KG', emoji: '🎒' },
+        { value: '1st - 5th', label: '1st - 5th Std', emoji: '📚' },
+        { value: '6th - 8th', label: '6th - 8th Std', emoji: '📖' },
+        { value: '9th - 10th', label: '9th - 10th Std', emoji: '🎓' },
+    ];
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,9 +28,9 @@ const Contact = () => {
     };
 
     const contactInfo = [
-        { icon: MapPin, label: 'Address', value: '123 Education Street, Mumbai 400001' },
-        { icon: Phone, label: 'Phone', value: '+91 98765 43210' },
-        { icon: Mail, label: 'Email', value: 'info@aimersacademy.com' },
+        { icon: MapPin, label: 'Address', value: 'Marwadi Compound, Gaon Devi Mandir, Dhaniv Baug, Nalasopara East, Maharashtra 401209' },
+        { icon: Phone, label: 'Phone', value: '+91 8433517305' },
+        { icon: Mail, label: 'Email', value: 'aimersacademy.education@gmail.com' },
         { icon: Clock, label: 'Timings', value: 'Mon - Sat: 7 AM - 8 PM' },
     ];
 
@@ -122,8 +130,8 @@ const Contact = () => {
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     style={inputStyle}
                                     onFocus={(e) => {
-                                        e.target.style.borderColor = COLORS.primary;
-                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.dark;
                                     }}
                                     onBlur={(e) => {
                                         e.target.style.borderColor = COLORS.dark;
@@ -138,8 +146,8 @@ const Contact = () => {
                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                     style={inputStyle}
                                     onFocus={(e) => {
-                                        e.target.style.borderColor = COLORS.primary;
-                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.dark;
                                     }}
                                     onBlur={(e) => {
                                         e.target.style.borderColor = COLORS.dark;
@@ -153,37 +161,136 @@ const Contact = () => {
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     style={inputStyle}
                                     onFocus={(e) => {
-                                        e.target.style.borderColor = COLORS.primary;
-                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.dark;
                                     }}
                                     onBlur={(e) => {
                                         e.target.style.borderColor = COLORS.dark;
                                         e.target.style.boxShadow = 'none';
                                     }}
                                 />
-                                <select
-                                    value={formData.class}
-                                    onChange={(e) => setFormData({ ...formData, class: e.target.value })}
-                                    style={{
-                                        ...inputStyle,
-                                        color: formData.class ? COLORS.dark : '#94a3b8',
-                                        cursor: 'pointer',
-                                    }}
-                                    onFocus={(e) => {
-                                        e.target.style.borderColor = COLORS.primary;
-                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
-                                    }}
-                                    onBlur={(e) => {
-                                        e.target.style.borderColor = COLORS.dark;
-                                        e.target.style.boxShadow = 'none';
-                                    }}
-                                >
-                                    <option value="">Select Class</option>
-                                    <option value="Jr. KG - Sr. KG">Jr. KG - Sr. KG</option>
-                                    <option value="1st - 5th">1st - 5th Std</option>
-                                    <option value="6th - 8th">6th - 8th Std</option>
-                                    <option value="9th - 10th">9th - 10th Std</option>
-                                </select>
+                                {/* Custom Styled Dropdown */}
+                                <div style={{ position: 'relative' }}>
+                                    {/* Dropdown Trigger */}
+                                    <div
+                                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                        style={{
+                                            ...inputStyle,
+                                            width: '100%',
+                                            boxSizing: 'border-box',
+                                            color: formData.class ? COLORS.dark : '#94a3b8',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                            boxShadow: isDropdownOpen ? '4px 4px 0px ' + COLORS.dark : 'none',
+                                        }}
+                                    >
+                                        <span>
+                                            {formData.class
+                                                ? classOptions.find(opt => opt.value === formData.class)?.emoji + ' ' + classOptions.find(opt => opt.value === formData.class)?.label
+                                                : 'Select Class *'
+                                            }
+                                        </span>
+                                        <svg
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke={COLORS.dark}
+                                            strokeWidth="2.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            style={{
+                                                transition: 'transform 0.2s ease',
+                                                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                                            }}
+                                        >
+                                            <path d="m6 9 6 6 6-6" />
+                                        </svg>
+                                    </div>
+
+                                    {/* Dropdown Options Container */}
+                                    {isDropdownOpen && (
+                                        <>
+                                            {/* Backdrop to close dropdown */}
+                                            <div
+                                                onClick={() => setIsDropdownOpen(false)}
+                                                style={{
+                                                    position: 'fixed',
+                                                    top: 0,
+                                                    left: 0,
+                                                    right: 0,
+                                                    bottom: 0,
+                                                    zIndex: 99,
+                                                }}
+                                            />
+                                            <div style={{
+                                                position: 'absolute',
+                                                top: 'calc(100% + 8px)',
+                                                left: 0,
+                                                right: 0,
+                                                background: COLORS.white,
+                                                border: `2px solid ${COLORS.dark}`,
+                                                borderRadius: '12px',
+                                                boxShadow: '6px 6px 0px ' + COLORS.dark,
+                                                overflow: 'hidden',
+                                                zIndex: 100,
+                                                animation: 'dropdownSlide 0.2s ease',
+                                            }}>
+                                                {classOptions.map((option, index) => (
+                                                    <div
+                                                        key={option.value}
+                                                        onClick={() => {
+                                                            setFormData({ ...formData, class: option.value });
+                                                            setIsDropdownOpen(false);
+                                                        }}
+                                                        style={{
+                                                            padding: '14px 20px',
+                                                            cursor: 'pointer',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: '12px',
+                                                            background: formData.class === option.value ? COLORS.primaryLight : COLORS.white,
+                                                            borderBottom: index < classOptions.length - 1 ? `1px solid ${COLORS.border || '#e5e7eb'}` : 'none',
+                                                            transition: 'all 0.15s ease',
+                                                            fontWeight: formData.class === option.value ? 600 : 400,
+                                                            color: COLORS.dark,
+                                                        }}
+                                                        onMouseEnter={(e) => {
+                                                            if (formData.class !== option.value) {
+                                                                e.currentTarget.style.background = COLORS.warmBg || '#f9fafb';
+                                                            }
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            if (formData.class !== option.value) {
+                                                                e.currentTarget.style.background = COLORS.white;
+                                                            }
+                                                        }}
+                                                    >
+                                                        <span style={{ fontSize: '1.2rem' }}>{option.emoji}</span>
+                                                        <span style={{ fontSize: '1rem' }}>{option.label}</span>
+                                                        {formData.class === option.value && (
+                                                            <svg
+                                                                width="18"
+                                                                height="18"
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                stroke={COLORS.primary}
+                                                                strokeWidth="3"
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                style={{ marginLeft: 'auto' }}
+                                                            >
+                                                                <polyline points="20 6 9 17 4 12" />
+                                                            </svg>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
                                 <textarea
                                     placeholder="Your Message"
                                     rows={4}
@@ -195,8 +302,8 @@ const Contact = () => {
                                         fontFamily: 'inherit',
                                     }}
                                     onFocus={(e) => {
-                                        e.target.style.borderColor = COLORS.primary;
-                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.primary;
+                                        e.target.style.borderColor = COLORS.dark;
+                                        e.target.style.boxShadow = '4px 4px 0px ' + COLORS.dark;
                                     }}
                                     onBlur={(e) => {
                                         e.target.style.borderColor = COLORS.dark;
@@ -310,13 +417,14 @@ const Contact = () => {
                             boxShadow: SHADOWS.brutalist,
                         }}>
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.3524965039646!2d72.85127427498699!3d19.44036328184069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7a9aff921778b%3A0xc25591a96b1c3417!2sAimer's%20academy!5e0!3m2!1sen!2sin!4v1770571625719!5m2!1sen!2sin"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}
                                 allowFullScreen=""
                                 loading="lazy"
-                                title="Location"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                title="Aimer's Academy Location"
                             />
                         </div>
                     </div>
@@ -324,6 +432,16 @@ const Contact = () => {
             </div>
 
             <style>{`
+                @keyframes dropdownSlide {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-8px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
                 @media (max-width: 900px) {
                     #contact > div > div:last-child {
                         grid-template-columns: 1fr !important;
