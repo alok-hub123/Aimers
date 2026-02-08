@@ -16,7 +16,6 @@ const Achievements = () => {
         { name: 'Priya Sharma', score: '98.5%', class: '10th (2024)', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200' },
         { name: 'Rahul Verma', score: '97.2%', class: '10th (2024)', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200' },
         { name: 'Ananya Patel', score: '96.8%', class: '10th (2024)', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200' },
-        { name: 'Arjun Singh', score: '95.5%', class: '10th (2023)', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200' },
     ];
 
     useEffect(() => {
@@ -149,62 +148,148 @@ const Achievements = () => {
                     </h3>
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                        gap: '24px',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                        gap: '28px',
                     }}>
-                        {toppers.map((topper, index) => (
-                            <div
-                                key={index}
-                                style={{
-                                    background: COLORS.primaryLight,
-                                    borderRadius: '100px 100px 24px 24px',
-                                    padding: '32px',
-                                    textAlign: 'center',
-                                    border: `2px solid ${COLORS.dark}`,
-                                }}
-                            >
-                                <div style={{
-                                    width: '80px',
-                                    height: '80px',
-                                    borderRadius: '50%',
-                                    overflow: 'hidden',
-                                    margin: '0 auto 20px',
-                                    border: `3px solid ${COLORS.primary}`,
-                                }}>
-                                    <img
-                                        src={topper.image}
-                                        alt={topper.name}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover',
-                                        }}
-                                    />
+                        {toppers.map((topper, index) => {
+                            const rankColors = ['#FFD700', '#C0C0C0', '#CD7F32', '#B8860B'];
+                            const rankLabels = ['1st', '2nd', '3rd', '4th'];
+                            return (
+                                <div
+                                    key={index}
+                                    style={{
+                                        background: COLORS.white,
+                                        borderRadius: '16px',
+                                        padding: '0',
+                                        textAlign: 'center',
+                                        border: `3px solid ${COLORS.dark}`,
+                                        boxShadow: SHADOWS.brutalist,
+                                        position: 'relative',
+                                        overflow: 'visible',
+                                    }}
+                                >
+                                    {/* Ribbon Badge */}
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '-12px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        background: rankColors[index] || COLORS.primary,
+                                        color: index < 2 ? '#1a1a1a' : '#fff',
+                                        padding: '8px 24px',
+                                        borderRadius: '100px',
+                                        fontSize: '0.85rem',
+                                        fontWeight: 700,
+                                        border: `2px solid ${COLORS.dark}`,
+                                        boxShadow: '0 4px 0 rgba(0,0,0,0.2)',
+                                        zIndex: 10,
+                                        letterSpacing: '0.05em',
+                                    }}>
+                                        🏆 {rankLabels[index]} RANK
+                                    </div>
+
+                                    {/* Certificate Header */}
+                                    <div style={{
+                                        background: COLORS.primaryLight,
+                                        padding: '40px 24px 20px',
+                                        borderBottom: `2px dashed ${COLORS.dark}`,
+                                        borderRadius: '16px',
+                                    }}>
+                                        <div style={{
+                                            width: '90px',
+                                            height: '90px',
+                                            borderRadius: '50%',
+                                            overflow: 'hidden',
+                                            margin: '0 auto',
+                                            border: `4px solid ${COLORS.white}`,
+                                            boxShadow: `0 0 0 3px ${COLORS.dark}`,
+                                        }}>
+                                            <img
+                                                src={topper.image}
+                                                alt={topper.name}
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'cover',
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Certificate Body */}
+                                    <div style={{ padding: '24px' }}>
+                                        <div style={{
+                                            fontSize: '0.75rem',
+                                            color: COLORS.darkSecondary,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.15em',
+                                            marginBottom: '8px',
+                                            fontWeight: 500,
+                                        }}>
+                                            Certificate of Excellence
+                                        </div>
+                                        <h4 style={{
+                                            fontSize: '1.25rem',
+                                            fontWeight: 700,
+                                            color: COLORS.dark,
+                                            marginBottom: '12px',
+                                        }}>
+                                            {topper.name}
+                                        </h4>
+                                        <div style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '8px',
+                                            background: COLORS.warmBg,
+                                            padding: '10px 20px',
+                                            borderRadius: '100px',
+                                            border: `2px solid ${COLORS.dark}`,
+                                        }}>
+                                            <span style={{
+                                                fontSize: '1.4rem',
+                                                fontWeight: 800,
+                                                color: COLORS.primary,
+                                                fontFamily: 'system-ui, sans-serif',
+                                            }}>
+                                                {topper.score}
+                                            </span>
+                                        </div>
+                                        <div style={{
+                                            marginTop: '12px',
+                                            fontSize: '0.9rem',
+                                            color: COLORS.darkSecondary,
+                                            fontWeight: 500,
+                                        }}>
+                                            📚 {topper.class}
+                                        </div>
+                                    </div>
+
+                                    {/* Decorative corner accents */}
+                                    <div style={{
+                                        position: 'absolute',
+                                        bottom: '8px',
+                                        left: '8px',
+                                        width: '20px',
+                                        height: '20px',
+                                        borderLeft: `3px solid ${COLORS.primary}`,
+                                        borderBottom: `3px solid ${COLORS.primary}`,
+                                        borderRadius: '0 0 0 8px',
+                                        opacity: 0.5,
+                                    }} />
+                                    <div style={{
+                                        position: 'absolute',
+                                        bottom: '8px',
+                                        right: '8px',
+                                        width: '20px',
+                                        height: '20px',
+                                        borderRight: `3px solid ${COLORS.primary}`,
+                                        borderBottom: `3px solid ${COLORS.primary}`,
+                                        borderRadius: '0 0 8px 0',
+                                        opacity: 0.5,
+                                    }} />
                                 </div>
-                                <h4 style={{
-                                    fontSize: '1.1rem',
-                                    fontWeight: 600,
-                                    color: COLORS.dark,
-                                    marginBottom: '4px',
-                                }}>
-                                    {topper.name}
-                                </h4>
-                                <div style={{
-                                    fontSize: '1.5rem',
-                                    fontWeight: 700,
-                                    color: COLORS.primary,
-                                    marginBottom: '4px',
-                                }}>
-                                    {topper.score}
-                                </div>
-                                <span style={{
-                                    fontSize: '0.9rem',
-                                    color: COLORS.darkSecondary,
-                                }}>
-                                    {topper.class}
-                                </span>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </div>
