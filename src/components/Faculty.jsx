@@ -43,20 +43,25 @@ const Faculty = () => {
         },
     ];
 
-    // Responsive visible cards - we use 1 for mobile, 2 for tablet, 3 for desktop
-    // Using window check with fallback for SSR
-    const getVisibleCards = () => {
-        if (typeof window === 'undefined') return 3;
-        if (window.innerWidth <= 600) return 1;
-        if (window.innerWidth <= 900) return 2;
-        return 3;
+    // Card dimensions
+    const CARD_GAP = 24;
+
+    // Responsive visible cards and card width
+    const getResponsiveValues = () => {
+        if (typeof window === 'undefined') return { visible: 3, cardWidth: 300 };
+        if (window.innerWidth <= 500) return { visible: 1, cardWidth: Math.min(280, window.innerWidth - 48) };
+        if (window.innerWidth <= 768) return { visible: 1, cardWidth: 300 };
+        if (window.innerWidth <= 1100) return { visible: 2, cardWidth: 300 };
+        return { visible: 2, cardWidth: 300 };
     };
 
-    const [visibleCards, setVisibleCards] = React.useState(getVisibleCards());
+    const [responsiveValues, setResponsiveValues] = React.useState(getResponsiveValues());
+    const visibleCards = responsiveValues.visible;
+    const cardWidth = responsiveValues.cardWidth;
 
     React.useEffect(() => {
         const handleResize = () => {
-            setVisibleCards(getVisibleCards());
+            setResponsiveValues(getResponsiveValues());
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -206,25 +211,29 @@ const Faculty = () => {
                     <div style={{
                         overflow: 'hidden',
                         paddingBottom: '12px',
-                        paddingRight: '24px',
+                        paddingRight: '12px',
+                        marginRight: '-12px',
                     }}>
                         <div style={{
                             display: 'flex',
-                            gap: '24px',
-                            transform: `translateX(-${currentIndex * (300 + 24)}px)`,
+                            gap: `${CARD_GAP}px`,
+                            transform: `translateX(-${currentIndex * (cardWidth + CARD_GAP)}px)`,
                             transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                            paddingRight: '24px',
                         }}>
                             {teachers.map((teacher, index) => (
                                 <div
                                     key={index}
                                     style={{
-                                        minWidth: '300px',
+                                        minWidth: `${cardWidth}px`,
+                                        maxWidth: `${cardWidth}px`,
+                                        flexShrink: 0,
                                         background: COLORS.white,
                                         borderRadius: '24px',
                                         overflow: 'hidden',
                                         border: `2px solid ${COLORS.dark}`,
                                         boxShadow: SHADOWS.brutalist,
-                                        transition: 'opacity 0.3s ease',
+                                        transition: 'all 0.3s ease',
                                         opacity: index < currentIndex ? 0.3 : 1,
                                     }}
                                 >
@@ -350,7 +359,7 @@ const Faculty = () => {
                 @media (max-width: 1100px) {
                     #faculty > div > div {
                         grid-template-columns: 1fr !important;
-                        gap: 48px !important;
+                        gap: 40px !important;
                     }
                     #faculty > div > div > div:first-child {
                         position: static !important;
@@ -364,20 +373,25 @@ const Faculty = () => {
                         margin: 24px auto 0;
                     }
                 }
-                @media (max-width: 900px) {
-                    #faculty > div > div > div:last-child {
-                        padding-right: 12px !important;
-                    }
-                }
-                @media (max-width: 600px) {
+                @media (max-width: 768px) {
                     #faculty {
                         padding: 80px 16px !important;
                     }
-                    #faculty > div > div > div:last-child > div > div {
-                        min-width: 280px !important;
+                    #faculty > div > div > div:last-child {
+                        margin: 0 -16px;
+                        padding: 0 16px 12px !important;
+                    }
+                }
+                @media (max-width: 500px) {
+                    #faculty {
+                        padding: 60px 12px !important;
+                    }
+                    #faculty > div > div {
+                        gap: 32px !important;
                     }
                     #faculty > div > div > div:last-child {
-                        padding-right: 8px !important;
+                        margin: 0 -12px;
+                        padding: 0 12px 12px !important;
                     }
                 }
             `}</style>
