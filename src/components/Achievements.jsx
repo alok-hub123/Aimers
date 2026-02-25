@@ -7,16 +7,19 @@ const Achievements = () => {
 
     const stats = [
         { value: 500, suffix: '+', label: 'Happy Students', emoji: '🎓' },
-        { value: 10, suffix: '+', label: 'Years Experience', emoji: '📚' },
-        { value: 95, suffix: '%', label: 'Success Rate', emoji: '🏆' },
-        { value: 50, suffix: '+', label: 'Top Rankers', emoji: '⭐' },
+        { value: 3, suffix: '+', label: 'Years Experience', emoji: '📚' },
+        { value: 100, suffix: '%', label: 'Success Rate', emoji: '🏆' },
+        { value: 2, suffix: '', label: 'Operating Centers', emoji: '⭐' },
     ];
 
     const toppers = [
-        { name: 'Priya Sharma', score: '98.5%', class: '10th (2024)', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200' },
-        { name: 'Rahul Verma', score: '97.2%', class: '10th (2024)', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200' },
-        { name: 'Ananya Patel', score: '96.8%', class: '10th (2024)', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200' },
+        { name: 'Priya Sharma', score: '98.5%', high1: 'Maths: 89%', high2: 'Science: 92%', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200' },
+        { name: 'Rahul Verma', score: '97.2%', high1: 'English: 95%', high2: 'Hindi: 93%', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200' },
+        { name: 'Ananya Patel', score: '96.8%', high1: 'Maths: 87%', high2: 'Science: 94%', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200' },
+         { name: 'Priya Sharma', score: '98.5%', high1: 'Maths: 89%', high2: '', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200' },
+        { name: 'Rahul Verma', score: '97.2%', high1: 'Maths: 90%', high2: 'Science: 92%', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200' },
     ];
+    
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -153,7 +156,7 @@ const Achievements = () => {
                     }}>
                         {toppers.map((topper, index) => {
                             const rankColors = ['#FFD700', '#C0C0C0', '#CD7F32', '#B8860B'];
-                            const rankLabels = ['1st', '2nd', '3rd', '4th'];
+                            const rankLabels = ['2026', '2025', '2024', '2023', '2022', '2021'];
                             return (
                                 <div
                                     key={index}
@@ -185,7 +188,7 @@ const Achievements = () => {
                                         zIndex: 10,
                                         letterSpacing: '0.05em',
                                     }}>
-                                        🏆 {rankLabels[index]} RANK
+                                        🏆 {rankLabels[index]} 
                                     </div>
 
                                     {/* Certificate Header */}
@@ -260,7 +263,7 @@ const Achievements = () => {
                                             color: COLORS.darkSecondary,
                                             fontWeight: 500,
                                         }}>
-                                            📚 {topper.class}
+                                            📚 {topper.high1} {topper.high2 && `| ${topper.high2}`}
                                         </div>
                                     </div>
 

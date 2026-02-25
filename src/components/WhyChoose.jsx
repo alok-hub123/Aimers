@@ -32,7 +32,7 @@ const WhyChoose = () => {
         {
             icon: Award,
             title: 'Proven Results',
-            description: '95% success rate with numerous students scoring above 90%.',
+            description: '100% success rate with numerous students scoring above 90%.',
         },
     ];
 
@@ -89,7 +89,7 @@ const WhyChoose = () => {
                                 color: COLORS.darkSecondary,
                                 fontWeight: 500,
                             }}>
-                                10+ years of excellence
+                                3+ years of excellence
                             </span>
                         </div>
                     </div>

@@ -18,10 +18,10 @@ const Footer = () => {
     ];
 
     const social = [
-        { icon: Facebook, href: '#', label: 'Facebook' },
-        { icon: Instagram, href: '#', label: 'Instagram' },
-        { icon: Youtube, href: '#', label: 'Youtube' },
-        { icon: Twitter, href: '#', label: 'Twitter' },
+        { icon: Facebook, href: 'https://facebook.com/aimersacademy', label: 'Facebook', target: '_blank' },
+        { icon: Instagram, href: 'https://instagram.com/aimersacademy', label: 'Instagram', target: '_blank' },
+        { icon: Youtube, href: 'https://youtube.com/@aimersacademy', label: 'Youtube', target: '_blank' },
+        { icon: Twitter, href: 'https://twitter.com/aimersacademy', label: 'Twitter', target: '_blank' },
     ];
 
     return (
@@ -61,7 +61,7 @@ const Footer = () => {
                             maxWidth: '280px',
                             fontSize: '1rem',
                         }}>
-                            Empowering students with quality education since 2014.
+                            Empowering students with quality education since 2022.
                         </p>
                         <div style={{
                             display: 'flex',
@@ -71,6 +71,8 @@ const Footer = () => {
                                 <a
                                     key={index}
                                     href={item.href}
+                                    target={item.target || '_self'}
+                                    rel={item.target === '_blank' ? 'noopener noreferrer' : ''}
                                     aria-label={item.label}
                                     style={{
                                         width: '44px',
