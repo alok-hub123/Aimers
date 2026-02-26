@@ -29,7 +29,7 @@ const AboutUs = () => {
                             letterSpacing: '-0.03em',
                         }}>
                             Nurturing young minds{' '}
-                            <span style={{ color: COLORS.primary }}>since 2014</span>
+                            <span style={{ color: COLORS.primary }}>since 2022</span>
                         </h2>
                         <p style={{
                             fontSize: '1.25rem',

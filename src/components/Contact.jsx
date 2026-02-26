@@ -28,10 +28,11 @@ const Contact = () => {
     };
 
     const contactInfo = [
-        { icon: MapPin, label: 'Address', value: 'Marwadi Compound, Gaon Devi Mandir, Dhaniv Baug, Nalasopara East, Maharashtra 401209' },
-        { icon: Phone, label: 'Phone', value: '+91 8433517305' },
+        { icon: MapPin, label: 'Address1', value: 'Marwadi Compound, Gaon Devi Mandir, Dhaniv Baug, Nalasopara East, Maharashtra 401209' },
+        { icon: MapPin, label: 'Address2', value: 'Near Virar Phata Highway, Virar East, Maharashtra 401209' },
+        { icon: Phone, label: 'Phone', value: 'Adarsh Sir: 8433517305 | Rohan Sir: 7666398748' },
         { icon: Mail, label: 'Email', value: 'aimersacademy.education@gmail.com' },
-        { icon: Clock, label: 'Timings', value: 'Mon - Sat: 7 AM - 8 PM' },
+        { icon: Clock, label: 'Timings', value: 'Mon - Sat: 2 PM - 8 PM' },
     ];
 
     const inputStyle = {
@@ -418,6 +419,8 @@ const Contact = () => {
                         }}>
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.3524965039646!2d72.85127427498699!3d19.44036328184069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7a9aff921778b%3A0xc25591a96b1c3417!2sAimer's%20academy!5e0!3m2!1sen!2sin!4v1770571625719!5m2!1sen!2sin"
+
+                                // src="https://www.google.com/maps/place/%E0%A4%AE%E0%A4%BE%E0%A4%81+%E0%A4%A6%E0%A5%81%E0%A4%B0%E0%A5%8D%E0%A4%97%E0%A4%BE+%E0%A4%B2%E0%A5%87%E0%A4%A1%E0%A5%80%E0%A4%9C+%E0%A4%9F%E0%A5%87%E0%A4%B2%E0%A4%B0/@19.4709912,72.8850429,19z/data=!4m6!3m5!1s0x3be7a86e75b5958b:0x8ce4bbd604701e8!8m2!3d19.4709498!4d72.8852451!16s%2Fg%2F11rtv680dx?entry=ttu&g_ep=EgoyMDI2MDIyMi4wIKXMDSoASAFQAw%3D%3D"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}

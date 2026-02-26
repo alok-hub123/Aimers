@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -63,6 +64,8 @@ const Hero = () => {
             padding: '80px 20px 24px',
             backgroundColor: 'white',
         }}>
+           
+
             {/* Carousel Container */}
             <div style={{
                 position: 'relative',
@@ -73,6 +76,8 @@ const Hero = () => {
                 borderRadius: '24px',
                 overflow: 'hidden',
             }}>
+
+                
                 {/* Slides Container - Horizontal Slider */}
                 <div style={{
                     display: 'flex',

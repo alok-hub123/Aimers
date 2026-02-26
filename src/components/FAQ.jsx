@@ -12,15 +12,15 @@ const FAQ = () => {
         },
         {
             question: 'What are your batch timings?',
-            answer: 'We have multiple batches: Morning (7 AM - 9 AM), Afternoon (2 PM - 4 PM), and Evening (5 PM - 7 PM). Weekend batches are also available.',
+            answer: 'We have multiple batches: Morning (9 AM - 11 AM), Afternoon to Evening (2 PM - 8 PM).            Weekend batches are also available.',
         },
         {
             question: 'How do you ensure individual attention?',
-            answer: 'We maintain small batch sizes of maximum 15 students. This allows our teachers to focus on each student\'s progress and provide personalized guidance.',
+            answer: 'We maintain small batch sizes of maximum 20 students. This allows our teachers to focus on each student\'s progress and provide personalized guidance.',
         },
         {
             question: 'What is your fee structure?',
-            answer: 'Fees range from ₹1,500/month for primary classes to ₹4,000/month for 10th Board preparation. All study materials and tests are included.',
+            answer: 'Fees range from ₹500/month for primary classes to ₹15,000/month for 10th Board preparation. All study materials and tests are included.',
         },
         {
             question: 'Do you provide study materials?',

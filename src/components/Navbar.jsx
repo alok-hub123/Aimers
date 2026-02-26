@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { COLORS } from '../constants/theme';
+import logo from '../assets/logo.png';
 
 // Register plugins
 gsap.registerPlugin(useGSAP);
@@ -41,7 +42,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', href: '#hero', id: 'hero' },
     { name: 'About', href: '#about', id: 'about' },
-    { name: 'Classes', href: '#classes', id: 'classes' },
+    { name: 'Facilities', href: '#facilities', id: 'facilities' },
     { name: 'Faculty', href: '#faculty', id: 'faculty' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
@@ -60,8 +61,8 @@ const Navbar = () => {
         maxWidth: isScrolled ? '1160px' : '100%',
         margin: '0 auto',
         padding: isScrolled ? '10px 20px' : '0',
-        background: isScrolled ? COLORS.white : COLORS.white,
-        borderRadius: isScrolled ? '100px' : '0',
+        background: isScrolled ? COLORS.white : COLORS.warmBg,
+        borderRadius: isScrolled ? '100px' : '20px',
         boxShadow: isScrolled ? '0 2px 20px rgba(0, 0, 0, 0.08)' : 'none',
         border: isScrolled ? `2px solid ${COLORS.dark}` : 'none',
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -82,24 +83,26 @@ const Navbar = () => {
             textDecoration: 'none',
           }}>
             <div style={{
-              width: '40px',
-              height: '40px',
+              width: '80px',
+              height: '80px',
               borderRadius: '10px',
               overflow: 'hidden',
             }}>
               <img
-                src="/aimers-logo.jpg"
+                src={logo}
                 alt="Aimers Academy"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
             <span style={{
-              fontSize: '1.3rem',
+             
+              fontSize: '1.5rem',
               fontWeight: 700,
               color: COLORS.primary,
               letterSpacing: '-0.02em',
+              fontFamily: 'Batangas, serif',
             }}>
-              Aimers
+              Aimers Academy
             </span>
           </a>
 

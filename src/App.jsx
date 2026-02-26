@@ -10,6 +10,7 @@ import Classes from './components/Classes';
 import Faculty from './components/Faculty';
 import FAQ from './components/FAQ';
 import Testimonials from './components/Testimonials';
+import SocialMediaSection from './components/SocialMediaSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './App.css';
@@ -37,9 +38,6 @@ function App() {
         {/* 6. Our Methodology */}
         <Methodology />
 
-        {/* 7. Classes & Fee Structure */}
-        <Classes />
-
         {/* 8. Faculty */}
         <Faculty />
 
@@ -49,7 +47,10 @@ function App() {
         {/* 10. Testimonials */}
         <Testimonials />
 
-        {/* 11. Contact Us */}
+        {/* 11. Social Media Section */}
+        <SocialMediaSection />
+
+        {/* 13. Contact Us */}
         <Contact />
       </main>
       <Footer />
